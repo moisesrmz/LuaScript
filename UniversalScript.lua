@@ -532,7 +532,7 @@ function DataForPrint()
         sRev = "REV A"
         sNp = "74756653"
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-L.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-L-2.vbs\"")
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-L2.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-L.vbs\"")
 	    os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-F.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-A.vbs\"")
