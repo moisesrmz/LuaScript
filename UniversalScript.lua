@@ -398,18 +398,29 @@ function DataForPrint()
     elseif sPartNumber == "2098700432" then
         sRev = "REV A"
         sNp = "74756216" 
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-D.vbs\"")
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-F.vbs\"")
     elseif sPartNumber == "2098700433" then
         sRev = "REV A"
         sNp = "74756217" 
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-D.vbs\"")
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW17-000-A.vbs\"")
     elseif sPartNumber == "2098700434" then
         sRev = "REV A"
         sNp = "74756218"
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-D.vbs\"")
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-F.vbs\"")
     elseif sPartNumber == "2098700436" then
         sRev = "REV A"
-        sNp = "74756923" 
-elseif sPartNumber == "2098700437" then
+        sNp = "74756923"
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-C.vbs\"")
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-F.vbs\"")
+    elseif sPartNumber == "2098700437" then
         sRev = "REV A"
-        sNp = "74756195"    
+        sNp = "74756195"
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z115-000-C.vbs\"")
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-D.vbs\"")
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-C.vbs\"")--aqui
     elseif sPartNumber == "2098706005" then
         sRev = "REV A"
         sNp = "73755984"
@@ -460,13 +471,16 @@ elseif sPartNumber == "2098700437" then
         sNp = "74751592"
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-D.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-F.vbs\"")
-    
     elseif sPartNumber == "2098706072" then
-        sRev = "TBD"
-        sNp = "TBD"
+        sRev = "REV A"
+        sNp = "74755362"
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-C.vbs\"")
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-L.vbs\"")
     elseif sPartNumber == "2098706084" then
         sRev = "REV A"
         sNp = "73756503"
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-D.vbs\"")
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-L.vbs\"")
     elseif sPartNumber == "2098706085" then
         sRev = "REV A"
         sNp = "74757303"
@@ -565,6 +579,8 @@ elseif sPartNumber == "2098700437" then
     elseif sPartNumber == "2154140596" then
         sRev = "REV A"
         sNp = "74754728"
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-C00-A.vbs\"")
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-C00-A2.vbs\"")
     elseif sPartNumber == "2154150035" then
         sRev = "REV A"
         sNp = "73754988"
@@ -663,46 +679,49 @@ elseif sPartNumber == "2098700437" then
 
     elseif sPartNumber == "2154160031" then
         sPartNumber = "SJ8T-18812-REB"
-
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-C00-B.vbs\"")
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-A.vbs\"")
     elseif sPartNumber == "2154160032" then
         sPartNumber = "SJ8T-14F662-KB"
-
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-F.vbs\"")
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z114-000-A.vbs\"")
     elseif sPartNumber == "2154160034" then
         sPartNumber = "SJ8T-14F662-JA"
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-F.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59z178-000.vbs\"")
-
     elseif sPartNumber == "2154160035" then
         sPartNumber = "SJ8T-18812-RCA"
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-C00-B.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-B.vbs\"")
-
     elseif sPartNumber == "2154160036" then
         sPartNumber = "SJ8T-14F662-SC"
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-F.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z114-000-A.vbs\"")
-
     elseif sPartNumber == "2154160037" then
         sPartNumber = "SJ8T-14F662-KC"
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-F.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z114-000-A.vbs\"")
-
     elseif sPartNumber == "2154170049" then
         sPartNumber = "SJ8T-19A397-REB"
-
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ040-C00-D.vbs\"")
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ032-C00-C.vbs\"")
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-A.vbs\"")
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-B.vbs\"")
     elseif sPartNumber == "2154170050" then
         sPartNumber = "SJ8T-19A397-EB"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ040-C00-D-1.vbs\"")
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ040-C00-D.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-K.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-A.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-B.vbs\"")
-
     elseif sPartNumber == "2154170052" then
         sPartNumber = "SJ8T-19A397-LEA"
-
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ040-C00-D.vbs\"")
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ032-C00-C.vbs\"")
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-A.vbs\"")
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-B.vbs\"")
     elseif sPartNumber == "2154170059" then
         sPartNumber = "SJ8T-19A397-EB"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ040-C00-D-1.vbs\"")
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ040-C00-D.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-K.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-A.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-B.vbs\"")
