@@ -265,7 +265,7 @@ function DataForPrint()
         sNp = "73756631"
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-C.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW01-000-C.vbs\"")
-    elseif sPartNumber == "2098700256" then-------------------aqui voy
+    elseif sPartNumber == "2098700256" then
         sRev = "REV A"
         sNp = "74756219"
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW17-000-A.vbs\"")
@@ -420,7 +420,7 @@ function DataForPrint()
         sNp = "74756195"
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z115-000-C.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-D.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-C.vbs\"")--aqui
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-C.vbs\"")
     elseif sPartNumber == "2098706005" then
         sRev = "REV A"
         sNp = "73755984"
