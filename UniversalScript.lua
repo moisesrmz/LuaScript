@@ -107,19 +107,38 @@ function PrintStringRAW13char()
     .."^PQ1,0,1,Y^XZ\n"
     return sPrintStringRAW
 end
+--function PrintStringRAW()
+--   sPrintStringRAW = "CT~~CD,~CC^~CT~\n"                   -- Recien modificado, validar funcionamiento.
+--    .."^XA^CFD".."\n"
+--    .."^PON".."\n"
+--    .."^LH0,0".."\n"
+--    .."^FT116,80^A0N,60,68^FD#01#  3142^FS".."\n"            
+--    .."^FT116,132^A0N,60,68^FD#02#^FS".."\n"
+--    .."^FT116,184^A0N,60,68^FD#03#^FS".."\n"
+--    .."^FT116,236^A0N,60,68^FD#04#"..sLine.."^FS".."\n"          
+--    .."^PQ1,0,1".."\n"
+--    .."^XZ".."\n"
+--    return sPrintStringRAW
+--end
 function PrintStringRAW()
-    sPrintStringRAW = "CT~~CD,~CC^~CT~\n"                   -- Recien modificado, validar funcionamiento.
+    local sPartNumber = GetWirelistInfoAsText(1)
+    local pq_qty = "1"
+    if sPartNumber == "2088702207" then
+        pq_qty = "2"
+    end
+    sPrintStringRAW = "CT~~CD,~CC^~CT~\n"
     .."^XA^CFD".."\n"
     .."^PON".."\n"
     .."^LH0,0".."\n"
-    .."^FT116,80^A0N,60,68^FD#01#  3142^FS".."\n"            
+    .."^FT116,80^A0N,60,68^FD#01#  3142^FS".."\n"
     .."^FT116,132^A0N,60,68^FD#02#^FS".."\n"
     .."^FT116,184^A0N,60,68^FD#03#^FS".."\n"
-    .."^FT116,236^A0N,60,68^FD#04#"..sLine.."^FS".."\n"          
-    .."^PQ1,0,1".."\n"
+    .."^FT116,236^A0N,60,68^FD#04#"..sLine.."^FS".."\n"
+    .."^PQ"..pq_qty..",0,1".."\n"
     .."^XZ".."\n"
     return sPrintStringRAW
 end
+
 
 function PrintErrorOnCT4(errorText, np)
     -- Recortar texto innecesario si comienza con "LUA"
@@ -156,7 +175,7 @@ function DataForPrint()
 ---------------------------------------------------------------------------------------------------------------------------------------------
 -----------------------------------------------inicia seccion de agregacion de NP nuevos, etiqueta (wrap)------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------------     
-    if sPartNumber == "2003020591" then
+    if sPartNumber == "666" then
         sRev = "REV A"
         sNp = "NRS-S-DVP2011"
     elseif sPartNumber == "2003020692" then
@@ -328,8 +347,8 @@ function DataForPrint()
     elseif sPartNumber == "2098700316" then
         sRev = "REV A"
         sNp = "74751006"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z120-C00-C-1.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z120-C00-C-2.vbs\"")
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z120-C00-C.vbs\"")
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z120-C00-C2.vbs\"")
     elseif sPartNumber == "2098700320" then
         sRev = "REV A"
         sNp = "74750417"
@@ -426,6 +445,16 @@ function DataForPrint()
         sNp = "73755984"
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-A.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-L.vbs\"")
+    elseif sPartNumber == "2098706010" then
+        sRev = "REV A"
+        sNp = "09923935"
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-B.vbs\"")
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-B2.vbs\"")
+    elseif sPartNumber == "2098706011" then
+        sRev = "REV A"
+        sNp = "09923936"
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-B.vbs\"")
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-B2.vbs\"")
     elseif sPartNumber == "2098706013" then
         sRev = "REV A"
         sNp = "73755062"
@@ -537,7 +566,7 @@ function DataForPrint()
 	    os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-F.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-A.vbs\"")
     elseif sPartNumber == "2154140243" then
-        sRev = "REV A1"
+        sRev = "REV B"
         sNp = "74752567"
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\2291859-1.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z114-000-A.vbs\"")
@@ -552,17 +581,17 @@ function DataForPrint()
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\1-2291859-2.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z114-000-A.vbs\"")
     elseif sPartNumber == "2154140290" then
-        sRev = "REV A"
+        sRev = "REV A1"
         sNp = "74754399"
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\2291859-1.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z114-000-A.vbs\"")
     elseif sPartNumber == "2154140294" then
-        sRev = "REV B1"
+        sRev = "REV B2"
         sNp = "74754538"
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\2291859-1.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z232-000-C.vbs\"")
     elseif sPartNumber == "2154140295" then
-        sRev = "REV B2"
+        sRev = "REV B3"
         sNp = "74754539"
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\2291859-1.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z232-000-C.vbs\"")
@@ -612,7 +641,7 @@ function DataForPrint()
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW29-000-C.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-B.vbs\"")    
     elseif sPartNumber == "2154150563" then
-        sRev = "REV A"
+        sRev = "REV A1"
         sNp = "74753260"
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMS11A-102Z5.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z114-000-A.vbs\"")
@@ -621,6 +650,9 @@ function DataForPrint()
         sNp = "74753939"
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-A.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-B.vbs\"")
+    elseif sPartNumber == "2154150582Mating" then
+        sRev = "REV X"
+        sNp = "74753939"
     elseif sPartNumber == "2154150588" then
         sRev = "REV A"
         sNp = "E40941000"
@@ -652,7 +684,7 @@ function DataForPrint()
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\2291859-1.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z232-000-C.vbs\"")
     elseif sPartNumber == "2154150715" then
-        sRev = "REV A"
+        sRev = "REV A1"
         sNp = "74754957"
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\1-2291859-2.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z114-000-A.vbs\"")
@@ -660,7 +692,7 @@ function DataForPrint()
         sRev = "REV A1"
         sNp = "E42243000"
     elseif sPartNumber == "2154150943" then
-        sRev = "REV A"
+        sRev = "REV B"
         sNp = "74756301"
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW17-000-B.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-B.vbs\"")
@@ -710,6 +742,7 @@ function DataForPrint()
     elseif sPartNumber == "2154170050" then
         sPartNumber = "SJ8T-19A397-EB"
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ040-C00-D.vbs\"")
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ040-C00-E.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-K.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-A.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-B.vbs\"")
@@ -727,7 +760,7 @@ function DataForPrint()
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-B.vbs\"")
   
     else
-        error("Numero de parte no dado de alta: " .. sPartNumber", favor de contactar a Ing. de Pruebas") 
+        error("Numero de parte no dado de alta: " .. sPartNumber..", favor de contactar a Ing. de Pruebas") 
     end
     
     if sRev == sRevF then
@@ -898,7 +931,7 @@ function DoOnTestEvent(iEventType)
             local np = GetWirelistInfoAsText(1)
             PrintErrorOnCT4(errorText, np)
             local mess = DialogOpen("~Falla~".."Ensamble con falla, favor de llamar al depto. de calidad para que disponga material no conforme.\n\n\n\n" .. GetErrorText())
-            Delay(5)
+            Delay(2)
             DialogClose(mess)
         end
     end
