@@ -139,9 +139,7 @@ function PrintStringRAW()
     return sPrintStringRAW
 end
 
-
 function PrintErrorOnCT4(errorText, np)
-    -- Recortar texto innecesario si comienza con "LUA"
     if errorText:sub(1, 3) == "LUA" then
         local pointStart = errorText:find("Point")
         if pointStart then
@@ -696,6 +694,11 @@ function DataForPrint()
         sNp = "74756301"
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW17-000-B.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-B.vbs\"")
+    elseif sPartNumber == "2267110028" then
+        sRev = "REV A"
+        sNp = "09929842"
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW31-000-B.vbs\"")
+        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-A.vbs\"")
     -------------------------------------------------------------------------------------------------------------
     -------------------------------------------------------- Inicia bloque FORD
     -------------------------------------------------------------------------------------------------------------
@@ -758,6 +761,7 @@ function DataForPrint()
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-K.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-A.vbs\"")
         os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-B.vbs\"")
+    
   
     else
         error("Numero de parte no dado de alta: " .. sPartNumber..", favor de contactar a Ing. de Pruebas") 
