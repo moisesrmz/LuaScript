@@ -3,6 +3,7 @@
 local printerConfigFile = "C:\\Users\\Public\\Documents\\Cirris\\config.txt"
 local sThePrinterLocation, sThePrinterLocationCT4, sTester, sLine = "", "", "", ""
 local printerConfig = {}
+
 function LoadPrinterConfigurations(filePath)
     local configFile = io.open(filePath, "r")
     if not configFile then
@@ -107,39 +108,30 @@ function PrintStringRAW13char()
     .."^PQ1,0,1,Y^XZ\n"
     return sPrintStringRAW
 end
---function PrintStringRAW()
---   sPrintStringRAW = "CT~~CD,~CC^~CT~\n"                   -- Recien modificado, validar funcionamiento.
---    .."^XA^CFD".."\n"
---    .."^PON".."\n"
---    .."^LH0,0".."\n"
---    .."^FT116,80^A0N,60,68^FD#01#  3142^FS".."\n"            
---    .."^FT116,132^A0N,60,68^FD#02#^FS".."\n"
---    .."^FT116,184^A0N,60,68^FD#03#^FS".."\n"
---    .."^FT116,236^A0N,60,68^FD#04#"..sLine.."^FS".."\n"          
---    .."^PQ1,0,1".."\n"
---    .."^XZ".."\n"
---    return sPrintStringRAW
---end
 function PrintStringRAW()
     local sPartNumber = GetWirelistInfoAsText(1)
     local pq_qty = "1"
     if sPartNumber == "2088702207" then
         pq_qty = "2"
     end
+
     sPrintStringRAW = "CT~~CD,~CC^~CT~\n"
     .."^XA^CFD".."\n"
     .."^PON".."\n"
     .."^LH0,0".."\n"
-    .."^FT116,80^A0N,60,68^FD#01#  3142^FS".."\n"
+    .."^FT116,80^A0N,60,68^FD#01#  3142^FS".."\n"            
     .."^FT116,132^A0N,60,68^FD#02#^FS".."\n"
     .."^FT116,184^A0N,60,68^FD#03#^FS".."\n"
-    .."^FT116,236^A0N,60,68^FD#04#"..sLine.."^FS".."\n"
+    .."^FT116,236^A0N,60,68^FD#04#"..sLine.."^FS".."\n"          
     .."^PQ"..pq_qty..",0,1".."\n"
     .."^XZ".."\n"
+
     return sPrintStringRAW
 end
 
+
 function PrintErrorOnCT4(errorText, np)
+    -- Recortar texto innecesario si comienza con "LUA"
     if errorText:sub(1, 3) == "LUA" then
         local pointStart = errorText:find("Point")
         if pointStart then
@@ -163,6 +155,41 @@ function PrintErrorOnCT4(errorText, np)
     PrintRAWOnEZW(sPrintString, sThePrinterLocationCT4)
 end
 
+function IncrementCycleCounter(filePath)
+    -- 1. Leer valor actual del archivo
+    local file = io.open(filePath, "r")
+    local count = 0
+    if file then
+        local contents = file:read("*a")
+        file:close()
+        count = tonumber(contents) or 0
+    end
+    count = count + 1
+    if count >= 30000 then
+        -- Extraer solo el nombre del archivo (sin ruta)
+        local fileName = filePath:match("([^\\]+)$") or filePath
+
+        local mess = DialogOpen("Se han rebasado las 30,000 activaciones para:\n"..fileName.."\n\nFavor de contactar a Ingeniería de Pruebas.")
+        Delay(5)
+        DialogClose(mess)
+
+        os.execute('taskkill /f /im easywire.exe')
+        --count = 0 -- Reinicia el contador a 0 (puedes habilitarlo si deseas resetear)
+    end
+
+
+    -- 4. Escribir el nuevo valor al archivo
+    local fileWrite = io.open(filePath, "w")
+    if fileWrite then
+        fileWrite:write(tostring(count))
+        fileWrite:close()
+    else
+        error("No se pudo escribir en el archivo: " .. filePath)
+    end
+end
+
+local baseCounterPath = "\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\" .. sTester .. "\\"
+
 function DataForPrint()
     local sPartNumber, sRev, sNp, sPpap, sDate, sRevF
     sPartNumber = GetWirelistInfoAsText(1)
@@ -170,601 +197,558 @@ function DataForPrint()
     sRevF=sRev
     sDateF = date("%y%m%d")
     sDate = date("%y%m%d%H%M%S")
----------------------------------------------------------------------------------------------------------------------------------------------
------------------------------------------------inicia seccion de agregacion de NP nuevos, etiqueta (wrap)------------------------------------
----------------------------------------------------------------------------------------------------------------------------------------------     
-    if sPartNumber == "666" then
+--------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------inicia seccion de agregacion de NP nuevos, etiqueta (wrap)-----------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------     
+    if sPartNumber == "2003020591" then
         sRev = "REV A"
         sNp = "NRS-S-DVP2011"
     elseif sPartNumber == "2003020692" then
         sRev = "REV A"
         sNp = "74751006"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z120-C00-C.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z120-C00-C2.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z120-C00-C.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z120-C00-C2.txt")
     elseif sPartNumber == "2003020696" then
         sRev = "NRS-S-DVP2052"
         sNp = "Hybrid Jack-SF Plug"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z117-C01-A.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z114-000-A.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z117-C01-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z114-000-A.txt")
     elseif sPartNumber == "2088701244" then
         sRev = "REV B1"
         sNp = "09922944"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-A.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-A.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z163-003-A.txt")
     elseif sPartNumber == "2088701390" then
         sRev = "REV A1"
         sNp = "09923074"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-A.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-L.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z163-003-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z118-C00-L.txt")
     elseif sPartNumber == "2088701610" then
-        sRev = "REV A"
+        sRev = "REV A1"
         sNp = "09927149"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-A.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-A.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z163-003-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-A.txt")
     elseif sPartNumber == "2088702221" then
         sRev = "REV A1"
         sNp = "284R4 7SB0C"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ025-000-D.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-A.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z163-003-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-A.txt")
     ---------------------------------------------------------Nissan--------------------------------------------------
     elseif sPartNumber == "2088702198" then
         sRev = "REV B1"
-        sNp = "284T6 7SA0C"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ010-C00-F.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-F.vbs\"") 
+        sNp = "284T6 7SA0C" 
     elseif sPartNumber == "2088702199" then
         sRev = "REV C"
         sNp = "284T6 7SA0D"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-F.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW01-000-F.vbs\"")
     elseif sPartNumber == "2088702200" then
         sRev = "REV C"
         sNp = "284R5 7SB0B"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-N.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ032-C00-B.vbs\"")
     elseif sPartNumber == "2088702207" then
         sRev = "REV C"
         sNp = "284R4 7SA0B"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW31-000-B.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ010-C00-A.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW01-000-F.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ025-000-D.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-A.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-N.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "AMZW31-000-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZ010-C00-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW01-000-F.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZ025-000-D.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z118-C00-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-N.txt")
     elseif sPartNumber == "2088702221" then
         sRev = "REV A1"
         sNp = "284R4 7SB0C"      
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ025-000-D.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-A.vbs\"")
     elseif sPartNumber == "2088702318" then
         sRev = "REV A"
         sNp = "284R2 7SA1D"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-E.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMK18A-102Z5.vbs\"")
     elseif sPartNumber == "2088707042" then
         sRev = "REV B1"
         sNp = "284R5 7SB0C"  
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW31-000-B.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-N.vbs\"")
     ---------------------------------------------------------Nissan-ends-------------------------------------------------
     elseif sPartNumber == "2098700024" then
         sRev = "REV A2"
         sNp = "09923075"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z117-C01-A.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-L.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z117-C01-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z118-C00-L.txt")
     elseif sPartNumber == "2098700046" then
         sRev = "REV A2"
         sNp = "09922973"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z117-C01-A.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-L.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z117-C01-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z118-C00-L.txt")
     elseif sPartNumber == "2098700058" then
         sRev = "REV A3"
         sNp = "09923409"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-A.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-L.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z163-003-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z118-C00-L.txt")
     elseif sPartNumber == "2098700083" then
         sRev = "REV A1"
         sNp = "73753543"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z115-000-A.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z120-C00-C2.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z115-000-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z120-C00-C2.txt")
     elseif sPartNumber == "2098700154" then
         sRev = "REV A"
         sNp = "73754255"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z115-000-A.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z120-C00-C2.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z115-000-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z120-C00-C2.txt")
     elseif sPartNumber == "2098700189" then
         sRev = "REV A1"
         sNp = "73755126"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-B.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-B2.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z163-003-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z163-003-B.txt")
     elseif sPartNumber == "2098700245" then
         sRev = "REV A"
         sNp = "73756631"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-C.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW01-000-C.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-C.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW01-000-C.txt")
     elseif sPartNumber == "2098700256" then
         sRev = "REV A"
         sNp = "74756219"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW17-000-A.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-D.vbs\"")
     elseif sPartNumber == "2098700289" then
         sRev = "REV A"
         sNp = "74750754"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-C.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-C.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-C.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z118-C00-C.txt")
     elseif sPartNumber == "2098700290" then
-        sRev = "REV A"
+        sRev = "REV A1"
         sNp = "74750649"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-C00-C.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-C00-C.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-C00-C.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-C00-C.txt")
     elseif sPartNumber == "2098700293" then
         sRev = "REV A2"
         sNp = "74750789"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z117-C01-A.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-D.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z117-C01-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-D.txt")
     elseif sPartNumber == "2098700301" then
         sRev = "REV A"
         sNp = "74751008"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-C.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-C.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-C.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z118-C00-C.txt")
     elseif sPartNumber == "2098700302" then
         sRev = "REV A1"
         sNp = "74750416"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-B.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-D.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-D.txt")
     elseif sPartNumber == "2098700304" then
         sRev = "REV A"
         sNp = "74751009"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-D.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-F.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z118-C00-D.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-F.txt")
     elseif sPartNumber == "2098700305" then
         sRev = "REV A"
         sNp = "74751005"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-L.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-C00-L.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z118-C00-L.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-C00-L.txt")
     elseif sPartNumber == "2098700306" then
         sRev = "REV A1"
         sNp = "74750418"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-B.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-D.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-D.txt")
     elseif sPartNumber == "2098700307" then
         sRev = "REV A2"
         sNp = "74750426"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-B.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-A.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z163-003-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-A.txt")
     elseif sPartNumber == "2098700309" then
         sRev = "REV A2"
         sNp = "74750427"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-D.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-A.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z163-003-D.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-A.txt")
     elseif sPartNumber == "2098700315" then
         sRev = "REV A"
         sNp = "74751122"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-C.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-C.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-C.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-C.txt")
     elseif sPartNumber == "2098700316" then
         sRev = "REV A"
         sNp = "74751006"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z120-C00-C.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z120-C00-C2.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z120-C00-C.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z120-C00-C2.txt")
     elseif sPartNumber == "2098700320" then
         sRev = "REV A"
         sNp = "74750417"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-B.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-D.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-D.txt")
     elseif sPartNumber == "2098700322" then
         sRev = "REV 1"
         sNp = "74750747"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-B.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-B.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z163-003-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-B.txt")
     elseif sPartNumber == "2098700353" then
         sRev = "REV A1"
         sNp = "74751477"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-D.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-A.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z163-003-D.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-A.txt")
     elseif sPartNumber == "2098700355" then
         sRev = "REV A1"
         sNp = "74751591"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z120-C00-D.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z120-C00-C-2.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z120-C00-D.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z120-C00-C.txt")
     elseif sPartNumber == "2098700356" then
         sRev = "REV A"
         sNp = "74751561"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z120-C00-D.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z120-C00-C-2.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z120-C00-D.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z120-C00-C.txt")
     elseif sPartNumber == "2098700357" then
         sRev = "REV A"
         sNp = "74751593"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-K.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-C.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z118-C00-K.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z118-C00-C.txt")
     elseif sPartNumber == "2098700358" then
         sRev = "REV A"
         sNp = "74751739"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-C.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-C.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-C.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-C.txt")
     elseif sPartNumber == "2098700366" then
         sRev = "REV A1"
         sNp = "74752710"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-B.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-A.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z163-003-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z163-003-A.txt")
     elseif sPartNumber == "2098700371" then
         sRev = "REV A1"
         sNp = "74752798"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-C.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-L.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-C.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-L.txt")
     elseif sPartNumber == "2098700372" then
         sRev = "REV A"
         sNp = "74752799"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-B.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-L.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z163-003-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-L.txt")
     elseif sPartNumber == "2098700373" then
         sRev = "REV A"
         sNp = "74752802"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-C.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-L.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-C.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-L.txt")
     elseif sPartNumber == "2098700374" then
         sRev = "REV A"
         sNp = "74752803"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-B.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-L.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z163-003-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-L.txt")
     elseif sPartNumber == "2098700429" then
         sRev = "REV A"
         sNp = "73756690"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-C.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-C.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z163-003-C.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z118-C00-C.txt")
     elseif sPartNumber == "2098700432" then
         sRev = "REV A"
         sNp = "74756216" 
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-D.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-F.vbs\"")
     elseif sPartNumber == "2098700433" then
         sRev = "REV A"
         sNp = "74756217" 
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-D.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW17-000-A.vbs\"")
     elseif sPartNumber == "2098700434" then
         sRev = "REV A"
         sNp = "74756218"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-D.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-F.vbs\"")
     elseif sPartNumber == "2098700436" then
         sRev = "REV A"
-        sNp = "74756923"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-C.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-F.vbs\"")
+        sNp = "74756923" 
     elseif sPartNumber == "2098700437" then
         sRev = "REV A"
-        sNp = "74756195"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z115-000-C.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-D.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-C.vbs\"")
+        sNp = "74756195"    
     elseif sPartNumber == "2098706005" then
         sRev = "REV A"
         sNp = "73755984"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-A.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-L.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-L.txt")
     elseif sPartNumber == "2098706010" then
         sRev = "REV A"
         sNp = "09923935"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-B.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-B2.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z163-003-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z163-003-B2.txt")
     elseif sPartNumber == "2098706011" then
         sRev = "REV A"
         sNp = "09923936"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-B.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-B2.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z163-003-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z163-003-B2.txt")
     elseif sPartNumber == "2098706013" then
         sRev = "REV A"
         sNp = "73755062"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-B-1.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-B-2.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-B2.txt")
     elseif sPartNumber == "2098706018" then
         sRev = "REV A"
         sNp = "73755550"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-A.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-B.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z163-003-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-B.txt")
     elseif sPartNumber == "2098706021" then
         sRev = "REV A"
         sNp = "74750462"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-L.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-C00-L.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z118-C00-L.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-C00-L.txt")
     elseif sPartNumber == "2098706023" then
         sRev = "REV A"
         sNp = "73755926"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-L.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-C00-L.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z118-C00-L.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-C00-L.txt")
     elseif sPartNumber == "2098706024" then
         sRev = "REV A"
         sNp = "73755991"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-D.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-L.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-D.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-L.txt")
     elseif sPartNumber == "2098706025" then
         sRev = "REV A"
         sNp = "74750469"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-D.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-F.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z118-C00-D.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-F.txt")
     elseif sPartNumber == "2098706026" then
         sRev = "REV A"
         sNp = "74750725"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-C.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-F.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-C.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-F.txt")
     elseif sPartNumber == "2098706031" then
         sRev = "74751272"
         sNp = "REV A"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-L.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-D.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-L.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-D.txt")
     elseif sPartNumber == "2098706040" then
         sRev = "REV A"
         sNp = "74751592"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-D.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-F.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z118-C00-D.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-F.txt")
+    
     elseif sPartNumber == "2098706072" then
-        sRev = "REV A"
-        sNp = "74755362"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-C.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-L.vbs\"")
+        sRev = "TBD"
+        sNp = "TBD"
     elseif sPartNumber == "2098706084" then
         sRev = "REV A"
         sNp = "73756503"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-D.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-L.vbs\"")
     elseif sPartNumber == "2098706085" then
         sRev = "REV A"
         sNp = "74757303"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-D.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-L.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z153-000-D.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z153-000-L.txt")
     elseif sPartNumber == "2098706086" then
         sRev = "REV A"
         sNp = "74757261"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-E.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ025-000-F.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z118-C00-E.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZ025-000-F.txt")
 
     elseif sPartNumber == "2098706087" then
         sRev = "REV A"
         sNp = "74757252"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-E.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW17-000-C.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z118-C00-E.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW17-000-C.txt")
     elseif sPartNumber == "2098706088" then
         sRev = "REV A"
         sNp = "74757251"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-E.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ005-000-F.vbs\"")                
+        IncrementCycleCounter(baseCounterPath .. "59Z118-C00-E.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZ005-000-F.txt")                
     elseif sPartNumber == "2098706089" then
         sRev = "REV A"
         sNp = "74757260 "
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-E.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW17-000-C.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z118-C00-E.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW17-000-C.txt")
     elseif sPartNumber == "2099700048" then
         sRev = "REV A"
         sNp = "74753050"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-C.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW01-000-C.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-C.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW01-000-C.txt")
     elseif sPartNumber == "2099700057" then
         sRev = "REV A"
         sNp = "74756921"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-L.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-L-2.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-L.vbs\"")
-	    os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-F.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-A.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-L.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-L2.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z118-C00-L.txt")
+	    IncrementCycleCounter(baseCounterPath .. "59Z153-000-F.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-A.txt")
     elseif sPartNumber == "2099700058" then
         sRev = "REV A"
         sNp = "74756920"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-L.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-L-2.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-L.vbs\"")
-	    os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-F.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-A.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-L.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-L2.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z118-C00-L.txt")
+	    IncrementCycleCounter(baseCounterPath .. "59Z153-000-F.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-A.txt")
     elseif sPartNumber == "2099700059" then
         sRev = "REV A"
         sNp = "74756653"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-L.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z113-000-L2.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-L.vbs\"")
-	    os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-F.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-A.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-L.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-L2.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z118-C00-L.txt")
+	    IncrementCycleCounter(baseCounterPath .. "59Z153-000-F.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-A.txt")
     elseif sPartNumber == "2154140243" then
         sRev = "REV B"
         sNp = "74752567"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\2291859-1.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z114-000-A.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "2291859-1.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z114-000-A.txt")
     elseif sPartNumber == "2154140287" then
-        sRev = "REV A"
+        sRev = "REV A1"
         sNp = "74753871"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\2291859-1.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z114-000-A.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "2291859-1.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z114-000-A.txt")
     elseif sPartNumber == "2154140289" then
         sRev = "REV A"
         sNp = "74754419"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\1-2291859-2.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z114-000-A.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "1-2291859-2.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z114-000-A.txt")
     elseif sPartNumber == "2154140290" then
         sRev = "REV A1"
         sNp = "74754399"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\2291859-1.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z114-000-A.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "2291859-1.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z114-000-A.txt")
     elseif sPartNumber == "2154140294" then
         sRev = "REV B2"
         sNp = "74754538"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\2291859-1.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z232-000-C.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "2291859-1.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z232-000-C.txt")
     elseif sPartNumber == "2154140295" then
         sRev = "REV B3"
         sNp = "74754539"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\2291859-1.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z232-000-C.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "2291859-1.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z232-000-C.txt")
     elseif sPartNumber == "2154140336" then
         sRev = "REV A"
         sNp = "E45805200"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\2291859-1.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z114-000-A.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "2291859-1.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z114-000-A.txt")
     elseif sPartNumber == "2154140349" then
         sRev = "REV A"
         sNp = "74756611"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z231-000-A.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z232-000-A.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z231-000-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z232-000-A.txt")
     elseif sPartNumber == "2154140596" then
         sRev = "REV A"
         sNp = "74754728"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-C00-A.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-C00-A2.vbs\"")
     elseif sPartNumber == "2154150035" then
         sRev = "REV A1"
         sNp = "73754988"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z114-000-A.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ010-C00-B.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z114-000-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZ010-C00-B.txt")
     elseif sPartNumber == "2154150089" then
         sRev = "REV A1"
         sNp = "E34806300"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ040-C00-A.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-A.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "AMZ040-C00-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-A.txt")
     elseif sPartNumber == "2154150215" then
         sRev = "REV A1"
         sNp = "E34806600"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ040-C00-B.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-B.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "AMZ040-C00-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-B.txt")
     elseif sPartNumber == "2154150250" then
         sRev = "REV A1"
         sNp = "74751487"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMK12A-102Z5.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMS11A-102Z5.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "AMK12A-102Z5.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMS11A-102Z5.txt")
     elseif sPartNumber == "2154150337" then
         sRev = "REV A"
         sNp = "E35793800"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW29-000-C.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-B.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "AMZW29-000-C.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-B.txt")
     elseif sPartNumber == "2154150497" then
         sRev = "TBD"
         sNp = "TBD"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW29-000-C.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-B.vbs\"")    
+        IncrementCycleCounter(baseCounterPath .. "AMZW29-000-C.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-B.txt")    
     elseif sPartNumber == "2154150563" then
         sRev = "REV A1"
         sNp = "74753260"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMS11A-102Z5.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z114-000-A.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "AMS11A-102Z5.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z114-000-A.txt")
     elseif sPartNumber == "2154150582" then
         sRev = "REV B"
         sNp = "74753939"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-A.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-B.vbs\"")
-    elseif sPartNumber == "2154150582Mating" then
-        sRev = "REV X"
-        sNp = "74753939"
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-B.txt")
     elseif sPartNumber == "2154150588" then
         sRev = "REV A"
         sNp = "E40941000"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z114-000-A.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ010-C00-C.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z114-000-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZ010-C00-C.txt")
     elseif sPartNumber == "2154150605" then
-        sRev = "REV A"
+        sRev = "REV A1"
         sNp = "E41181500"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\2291859-1.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW17-000-C.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "2291859-1.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW17-000-C.txt")
     elseif sPartNumber == "2154150669" then
         sRev = "REV A"
         sNp = "74754535"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-B.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-A.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-A.txt")
     elseif sPartNumber == "2154150672" then
         sRev = "REV A"
         sNp = "74754534"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-A.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-B.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-B.txt")
     elseif sPartNumber == "2154150706" then
         sRev = "REV A2"
         sNp = "74754857"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\2291859-1.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z232-000-C.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "2291859-1.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z232-000-C.txt")
     elseif sPartNumber == "2154150707" then
-        sRev = "REV A1"
+        sRev = "REV A2"
         sNp = "74754858"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\2291859-1.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z232-000-C.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "2291859-1.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z232-000-C.txt")
     elseif sPartNumber == "2154150715" then
         sRev = "REV A1"
         sNp = "74754957"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\1-2291859-2.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z114-000-A.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "1-2291859-2.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z114-000-A.txt")
     elseif sPartNumber == "2154150719" then
         sRev = "REV A1"
         sNp = "E42243000"
     elseif sPartNumber == "2154150943" then
         sRev = "REV B"
         sNp = "74756301"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW17-000-B.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-B.vbs\"")
-    elseif sPartNumber == "2267110028" then
-        sRev = "REV A"
-        sNp = "09929842"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW31-000-B.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z118-C00-A.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "AMZW17-000-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-B.txt")
     -------------------------------------------------------------------------------------------------------------
     -------------------------------------------------------- Inicia bloque FORD
     -------------------------------------------------------------------------------------------------------------
     elseif sPartNumber == "2154160029" then
         sPartNumber = "SJ8T-18812-CB"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-C00-B.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-B.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z153-C00-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z153-000-B.txt")
         
     elseif sPartNumber == "2154160030" then
         sPartNumber = "SJ8T-18812-EB"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-C00-B.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-A.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z153-C00-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z153-000-A.txt")
 
     elseif sPartNumber == "2154160031" then
         sPartNumber = "SJ8T-18812-REB"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-C00-B.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-A.vbs\"")
+
     elseif sPartNumber == "2154160032" then
         sPartNumber = "SJ8T-14F662-KB"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-F.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z114-000-A.vbs\"")
+
     elseif sPartNumber == "2154160034" then
         sPartNumber = "SJ8T-14F662-JA"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z163-003-F.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59z178-000.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z163-003-F.txt")
+        IncrementCycleCounter(baseCounterPath .. "59z178-000.txt")
+
     elseif sPartNumber == "2154160035" then
         sPartNumber = "SJ8T-18812-RCA"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-C00-B.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-B.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z153-C00-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z153-000-B.txt")
+
     elseif sPartNumber == "2154160036" then
         sPartNumber = "SJ8T-14F662-SC"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-F.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z114-000-A.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-F.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z114-000-A.txt")
+
     elseif sPartNumber == "2154160037" then
         sPartNumber = "SJ8T-14F662-KC"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z176-C01-F.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z114-000-A.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-F.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z114-000-A.txt")
+
     elseif sPartNumber == "2154170049" then
         sPartNumber = "SJ8T-19A397-REB"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ040-C00-D.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ032-C00-C.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-A.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-B.vbs\"")
+
     elseif sPartNumber == "2154170050" then
         sPartNumber = "SJ8T-19A397-EB"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ040-C00-D.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ040-C00-E.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-K.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-A.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-B.vbs\"")
+        IncrementCycleCounter(baseCounterPath .. "AMZ040-C00-D.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z153-000-K.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-B.txt")
+
     elseif sPartNumber == "2154170052" then
         sPartNumber = "SJ8T-19A397-LEA"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ040-C00-D.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ032-C00-C.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-A.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-B.vbs\"")
+
     elseif sPartNumber == "2154170059" then
         sPartNumber = "SJ8T-19A397-EB"
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZ040-C00-D.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\59Z153-000-K.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-A.vbs\"")
-        os.execute("cscript //nologo \"\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\"..sTester.."\\AMZW25-000-B.vbs\"")
-    
+        IncrementCycleCounter(baseCounterPath .. "AMZ040-C00-D.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z153-000-K.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-B.txt")
   
     else
-        error("Numero de parte no dado de alta: " .. sPartNumber..", favor de contactar a Ing. de Pruebas") 
+        error("Numero de parte no dado de alta: " .. sPartNumber", favor de contactar a Ing. de Pruebas") 
     end
     
     if sRev == sRevF then
@@ -820,31 +804,30 @@ function ConvertPartNumber(sPartNumber)
 end
 
 function PrintRAWOnEZW(sSendToPrinterInput, sGetToPrinterHere)
-    local sPrintToFileName = "LblTemp.prn"
-    local sSendToPrinterPath = "C:\\Users\\Public\\Documents\\Cirris\\printer"
-    local sPrintToBatchName = "PrintLbl.bat"
-    local sBatchCommands = "@echo off\n@echo Sending to Printer"
     local sPrinterLocation
-    if sGetToPrinterHere == sThePrinterLocation then
-      sPrinterLocation = sThePrinterLocation
-    elseif sGetToPrinterHere == sThePrinterLocationCT4 then
-      sPrinterLocation = sThePrinterLocationCT4
+
+    if sGetToPrinterHere == sThePrinterLocationCT4 then
+        sPrinterLocation = sThePrinterLocationCT4
     else
-      sPrinterLocation = sThePrinterLocation
+        sPrinterLocation = sThePrinterLocation
     end
-    local sBatchCommands = "@echo off\n@echo Sending to Printer".."\ncopy \""..sSendToPrinterPath.."\"\\"..sPrintToFileName
-    sBatchCommands = sBatchCommands.." "..sPrinterLocation.." /b\nexit"
-    WriteStringToFile(sSendToPrinterPath.."\\"..sPrintToFileName, sSendToPrinterInput)
-    WriteStringToFile(sSendToPrinterPath.."\\"..sPrintToBatchName, sBatchCommands)
-    execute("\""..sSendToPrinterPath.."\\"..sPrintToBatchName.."\"")
-end
-function WriteStringToFile(sFileNameAndPath, sWriteThis)
-    local iHandle = io.open(sFileNameAndPath, "w")
-    if iHandle ~= nil then
-        iHandle:write(sWriteThis)
-        iHandle:close()
+
+    local printer = io.open(sPrinterLocation, "wb")
+    if printer then
+        printer:write(sSendToPrinterInput)
+        printer:close()
+    end
+
+    local backupFolder = "C:\\Users\\Public\\Documents\\Cirris\\printer\\"
+    --os.execute('mkdir "' .. backupFolder .. '" >nul 2>&1')  
+    local backupFile = backupFolder .. "LblTemp.prn"--esto, para el conteo de pzas probadas y yield
+    local backup = io.open(backupFile, "wb")
+    if backup then
+        backup:write(sSendToPrinterInput)
+        backup:close()
     end
 end
+
 
 function FindAndReplaceInsideString(sFindAndReplaceInput, tFindAndReplaceWith, sFindAndReplaceControl)
     if not sFindAndReplaceControl then
@@ -935,7 +918,7 @@ function DoOnTestEvent(iEventType)
             local np = GetWirelistInfoAsText(1)
             PrintErrorOnCT4(errorText, np)
             local mess = DialogOpen("~Falla~".."Ensamble con falla, favor de llamar al depto. de calidad para que disponga material no conforme.\n\n\n\n" .. GetErrorText())
-            Delay(2)
+            Delay(5)
             DialogClose(mess)
         end
     end
