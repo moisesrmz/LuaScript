@@ -224,7 +224,7 @@ function DataForPrint()
         IncrementCycleCounter(baseCounterPath .. "59Z163-003-A.txt")
         IncrementCycleCounter(baseCounterPath .. "59Z118-C00-L.txt")
     elseif sPartNumber == "2088701610" then
-        sRev = "REV A1"
+        sRev = "REV A"
         sNp = "09927149"
         IncrementCycleCounter(baseCounterPath .. "59Z163-003-A.txt")
         IncrementCycleCounter(baseCounterPath .. "59Z176-C01-A.txt")
@@ -436,7 +436,9 @@ function DataForPrint()
         sNp = "74756218"
     elseif sPartNumber == "2098700436" then
         sRev = "REV A"
-        sNp = "74756923" 
+        sNp = "74756923"
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-C.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z153-000-F.txt")
     elseif sPartNumber == "2098700437" then
         sRev = "REV A"
         sNp = "74756195"    
@@ -504,6 +506,11 @@ function DataForPrint()
     elseif sPartNumber == "2098706072" then
         sRev = "TBD"
         sNp = "TBD"
+    elseif sPartNumber == "2098706083" then
+        sRev = "REV A"
+        sNp = "09927602"
+        IncrementCycleCounter(baseCounterPath .. "59Z163-003-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z163-003-B2.txt")
     elseif sPartNumber == "2098706084" then
         sRev = "REV A"
         sNp = "73756503"
@@ -530,9 +537,14 @@ function DataForPrint()
         IncrementCycleCounter(baseCounterPath .. "AMZ005-000-F.txt")                
     elseif sPartNumber == "2098706089" then
         sRev = "REV A"
-        sNp = "74757260 "
+        sNp = "74757260"
         IncrementCycleCounter(baseCounterPath .. "59Z118-C00-E.txt")
         IncrementCycleCounter(baseCounterPath .. "AMZW17-000-C.txt")
+    elseif sPartNumber == "2098706091" then
+        sRev = "REV A NON-PPAP"
+        sNp = "JL-0003"
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-D.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-A.txt")
     elseif sPartNumber == "2099700048" then
         sRev = "REV A"
         sNp = "74753050"
@@ -553,7 +565,7 @@ function DataForPrint()
         IncrementCycleCounter(baseCounterPath .. "59Z113-000-L2.txt")
         IncrementCycleCounter(baseCounterPath .. "59Z118-C00-L.txt")
 	    IncrementCycleCounter(baseCounterPath .. "59Z153-000-F.txt")
-        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZ025-000-A.txt")
     elseif sPartNumber == "2099700059" then
         sRev = "REV A"
         sNp = "74756653"
@@ -561,7 +573,7 @@ function DataForPrint()
         IncrementCycleCounter(baseCounterPath .. "59Z113-000-L2.txt")
         IncrementCycleCounter(baseCounterPath .. "59Z118-C00-L.txt")
 	    IncrementCycleCounter(baseCounterPath .. "59Z153-000-F.txt")
-        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZ025-000-A.txt")
     elseif sPartNumber == "2154140243" then
         sRev = "REV B"
         sNp = "74752567"
@@ -625,6 +637,12 @@ function DataForPrint()
         sNp = "74751487"
         IncrementCycleCounter(baseCounterPath .. "AMK12A-102Z5.txt")
         IncrementCycleCounter(baseCounterPath .. "AMS11A-102Z5.txt")
+ 	
+    elseif sPartNumber == "2154151075" then
+        sRev = "REV A"
+        sNp = "74757361"
+        IncrementCycleCounter(baseCounterPath .. "AMK12A-102Z5.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMS11A-102Z5.txt")
     elseif sPartNumber == "2154150337" then
         sRev = "REV A"
         sNp = "E35793800"
@@ -671,7 +689,7 @@ function DataForPrint()
         IncrementCycleCounter(baseCounterPath .. "2291859-1.txt")
         IncrementCycleCounter(baseCounterPath .. "59Z232-000-C.txt")
     elseif sPartNumber == "2154150707" then
-        sRev = "REV A2"
+        sRev = "REV A1"
         sNp = "74754858"
         IncrementCycleCounter(baseCounterPath .. "2291859-1.txt")
         IncrementCycleCounter(baseCounterPath .. "59Z232-000-C.txt")
@@ -688,6 +706,16 @@ function DataForPrint()
         sNp = "74756301"
         IncrementCycleCounter(baseCounterPath .. "AMZW17-000-B.txt")
         IncrementCycleCounter(baseCounterPath .. "AMZW25-000-B.txt")
+    elseif sPartNumber == "2098700058" then
+        sRev = "REV A3"
+        sNp = "99754308"
+        IncrementCycleCounter(baseCounterPath .. "59Z163-003-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z118-C00-L.txt")
+    elseif sPartNumber == "2098706023" then
+        sRev = "REV A"
+        sNp = "73755926"
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-D.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-L.txt")
     -------------------------------------------------------------------------------------------------------------
     -------------------------------------------------------- Inicia bloque FORD
     -------------------------------------------------------------------------------------------------------------
@@ -871,17 +899,17 @@ end
 
 function DoOnTestEvent(iEventType)
 
-    if iEventType == 2 then
-        local inputDetected = ReadUserInputStates(3)
-        while inputDetected == 0 do
-            local mess = DialogOpen("Advertencia:\n\n\nPresion de aire fuera del rango permitido: <40psi y >90psi.\n\n\nNo puedes continuar probando, favor de llamar a Ingenieria de Pruebas.")
-            Delay(1)
-            DialogClose(mess)
-            inputDetected = ReadUserInputStates(3)
-        end
+    --if iEventType == 2 then
+    --   local inputDetected = ReadUserInputStates(3)
+    --    while inputDetected == 0 do
+    --        local mess = DialogOpen("Advertencia:\n\n\nPresion de aire fuera del rango permitido: <40psi y >90psi.\n\n\nNo puedes continuar probando, favor de llamar a Ingenieria de Pruebas.")
+    --        Delay(1)
+    --        DialogClose(mess)
+    --        inputDetected = ReadUserInputStates(3)
+    --    end
 
-        Delay(0)
-    end
+    --    Delay(0)
+    --end
     -------------------------------------------------------------------
     if iEventType == 3 then
         if (bAutoGood == 1) and (GetCableStatus() == 0) then
