@@ -946,7 +946,7 @@ function DoOnTestEvent(iEventType)
             local np = GetWirelistInfoAsText(1)
             PrintErrorOnCT4(errorText, np)
             local mess = DialogOpen("~Falla~".."Ensamble con falla, favor de llamar al depto. de calidad para que disponga material no conforme.\n\n\n\n" .. GetErrorText())
-            Delay(5)
+            Delay(3)
             DialogClose(mess)
         end
     end
