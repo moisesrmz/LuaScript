@@ -203,6 +203,19 @@ function DataForPrint()
     if sPartNumber == "2003020591" then
         sRev = "REV A"
         sNp = "NRS-S-DVP2011"
+    elseif sPartNumber == "probando" then
+        sRev = "REV A"
+        sNp = "74751006"
+        --IncrementCycleCounter(baseCounterPath .. "59Z120-C00-C.txt")
+        --IncrementCycleCounter(baseCounterPath .. "59Z120-C00-C2.txt")
+    elseif sPartNumber == "2003021248" then
+        sRev = "NRS-S-DVP2730"
+        sNp = "RSB CONDUMEX"
+        --IncrementCycleCounter(baseCounterPath .. "59Z120-C00-C.txt")
+        --IncrementCycleCounter(baseCounterPath .. "59Z120-C00-C2.txt")
+    elseif sPartNumber == "testing" then
+        sRev = "REV A"
+        sNp = "74751006"
     elseif sPartNumber == "2003020692" then
         sRev = "REV A"
         sNp = "74751006"
