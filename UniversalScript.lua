@@ -856,6 +856,7 @@ function PrintRAWOnEZW(sSendToPrinterInput, sGetToPrinterHere)
     local printer = io.open(sPrinterLocation, "wb")
     if printer then
         printer:write(sSendToPrinterInput)
+        printer:write("^XA^PQ0^XZ")--probando , para evitar que se quede atorada la impresora, esto hace que no imprima nada pero le da el comando de fin de etiqueta, asi no se queda atorada esperando mas datos
         printer:close()
     end
 
