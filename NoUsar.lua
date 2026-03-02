@@ -125,7 +125,6 @@ function PrintStringRAW()
     .."^FT116,236^A0N,60,68^FD#04#"..sLine.."^FS".."\n"          
     .."^PQ"..pq_qty..",0,1".."\n"
     .."^XZ".."\n"
-
     return sPrintStringRAW
 end
 
@@ -203,6 +202,19 @@ function DataForPrint()
     if sPartNumber == "2003020591" then
         sRev = "REV A"
         sNp = "NRS-S-DVP2011"
+    elseif sPartNumber == "probando" then
+        sRev = "REV A"
+        sNp = "74751006"
+        --IncrementCycleCounter(baseCounterPath .. "59Z120-C00-C.txt")
+        --IncrementCycleCounter(baseCounterPath .. "59Z120-C00-C2.txt")
+    elseif sPartNumber == "2003021248" then
+        sRev = "NRS-S-DVP2730"
+        sNp = "RSB CONDUMEX"
+        --IncrementCycleCounter(baseCounterPath .. "59Z120-C00-C.txt")
+        --IncrementCycleCounter(baseCounterPath .. "59Z120-C00-C2.txt")
+    elseif sPartNumber == "testing" then
+        sRev = "REV A"
+        sNp = "74751006"
     elseif sPartNumber == "2003020692" then
         sRev = "REV A"
         sNp = "74751006"
@@ -830,28 +842,42 @@ function ConvertPartNumber(sPartNumber)
         return sPartNumber
     end
 end
+-- Construye comando DC2+PA para Common Settings (CA)
+function BuildDisableReprintCommand()
+
+    local DC2 = string.char(0x12)  -- 0x12
+    local setting_data = "REPRINT:0\r\n"
+    local id = "CA"
+    local data_size = #setting_data
+    local after_b = id .. "," .. tostring(data_size) .. "," .. setting_data
+    local total_bytes = #after_b
+    local cmd = DC2 .. "PA," .. tostring(total_bytes) .. "," .. after_b
+    return cmd
+end
 
 function PrintRAWOnEZW(sSendToPrinterInput, sGetToPrinterHere)
     local sPrinterLocation
-
     if sGetToPrinterHere == sThePrinterLocationCT4 then
         sPrinterLocation = sThePrinterLocationCT4
     else
         sPrinterLocation = sThePrinterLocation
     end
-
+    -- 🔥 Construimos comando para forzar REPRINT=0
+    local disableReprintCmd = BuildDisableReprintCommand()
+    -- 🔥 Payload final: primero configuración, luego etiqueta
+    local payload = disableReprintCmd .. sSendToPrinterInput
     local printer = io.open(sPrinterLocation, "wb")
     if printer then
-        printer:write(sSendToPrinterInput)
+        printer:write(payload)
         printer:close()
     end
 
+    -- Backup completo
     local backupFolder = "C:\\Users\\Public\\Documents\\Cirris\\printer\\"
-    --os.execute('mkdir "' .. backupFolder .. '" >nul 2>&1')  
-    local backupFile = backupFolder .. "LblTemp.prn"--esto, para el conteo de pzas probadas y yield
+    local backupFile = backupFolder .. "LblTemp.prn"
     local backup = io.open(backupFile, "wb")
     if backup then
-        backup:write(sSendToPrinterInput)
+        backup:write(payload)
         backup:close()
     end
 end

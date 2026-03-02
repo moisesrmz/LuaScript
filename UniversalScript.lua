@@ -125,7 +125,6 @@ function PrintStringRAW()
     .."^FT116,236^A0N,60,68^FD#04#"..sLine.."^FS".."\n"          
     .."^PQ"..pq_qty..",0,1".."\n"
     .."^XZ".."\n"
-
     return sPrintStringRAW
 end
 
@@ -856,7 +855,8 @@ function PrintRAWOnEZW(sSendToPrinterInput, sGetToPrinterHere)
     local printer = io.open(sPrinterLocation, "wb")
     if printer then
         printer:write(sSendToPrinterInput)
-        printer:write("^XA^PQ0^XZ")--probando , para evitar que se quede atorada la impresora, esto hace que no imprima nada pero le da el comando de fin de etiqueta, asi no se queda atorada esperando mas datos
+        --printer:write(ESC.."A"..ESC.."Z")--probando , para evitar que se quede atorada la impresora, esto hace que no imprima nada pero le da el comando de fin de etiqueta, asi no se queda atorada esperando mas datos
+        --printer:write(string.char(27).."A"..string.char(27).."Z")
         printer:close()
     end
 
