@@ -754,7 +754,7 @@ function DataForPrint()
 
     elseif sPartNumber == "2154160035" then
         sPartNumber = "SJ8T-18812-RCA"
-        IncrementCycleCounter(baseCounterPath .. "59Z153-C00-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z153-000-B.txt")
         IncrementCycleCounter(baseCounterPath .. "59Z153-000-B.txt")
 
     elseif sPartNumber == "2154160036" then
@@ -786,9 +786,65 @@ function DataForPrint()
         IncrementCycleCounter(baseCounterPath .. "59Z153-000-K.txt")
         IncrementCycleCounter(baseCounterPath .. "AMZW25-000-A.txt")
         IncrementCycleCounter(baseCounterPath .. "AMZW25-000-B.txt")
-  
+
+    -------------------------------------------------------------------------------------------NEW ONES
+    elseif sPartNumber == "2154170067" then
+        sPartNumber = "SJ8T-18812-CC"
+        IncrementCycleCounter(baseCounterPath .. "59Z153-C00-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z153-000-B.txt")
+
+    elseif sPartNumber == "2154170073" then
+        sPartNumber = "SJ8T-18812-EC"
+        IncrementCycleCounter(baseCounterPath .. "59Z153-C00-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z153-000-A.txt")
+
+    elseif sPartNumber == "2154170069" then
+        sPartNumber = "SJ8T-18812-RCB"
+        IncrementCycleCounter(baseCounterPath .. "59Z153-000-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z153-000-B.txt")
+
+    elseif sPartNumber == "2154170068" then
+        sPartNumber = "SJ8T-14F662-SD"
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-F.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z114-000-A.txt")
+
+    elseif sPartNumber == "2154170066" then
+        sPartNumber = "SJ8T-14F662-KD"
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-F.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z114-000-A.txt")
+
+    elseif sPartNumber == "2154170070" then
+        sPartNumber = "SJ8T-18812-REC"
+        IncrementCycleCounter(baseCounterPath .. "59Z153-C00-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z153-000-A.txt")
+
+    elseif sPartNumber == "2154160038" then
+        sPartNumber = "SJ8T-14F662-JA"
+
+    elseif sPartNumber == "2154170072" then
+        sPartNumber = "SJ8T-19A397-EC"
+        IncrementCycleCounter(baseCounterPath .. "AMZ040-C00-D.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z153-000-K.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-B.txt")
+
+    elseif sPartNumber == "2154170071" then
+        sPartNumber = "SJ8T-19A397-LEB"
+        IncrementCycleCounter(baseCounterPath .. "AMZ040-C00-D.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z153-000-K.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-B.txt")
+
+    elseif sPartNumber == "2154170061" then
+        sPartNumber = "SJ8T-19A397-REC"
+        IncrementCycleCounter(baseCounterPath .. "AMZ040-C00-D.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z153-000-K.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-B.txt")
+
+
     else
-        error("Numero de parte no dado de alta: " .. sPartNumber", favor de contactar a Ing. de Pruebas") 
+        error("Numero de parte no dado de alta: " .. sPartNumber .. ", favor de contactar a Ing. de Pruebas") 
     end
     
     if sRev == sRevF then
@@ -838,6 +894,27 @@ function ConvertPartNumber(sPartNumber)
         return "SJ8T-14F662-SC"
     elseif sPartNumber == "2154160037" then
         return "SJ8T-14F662-KC"
+    ----------------------------------------------------Actualizacion 17/06/2024
+    elseif sPartNumber == "2154170067" then
+        return "SJ8T-18812-CC"
+    elseif sPartNumber == "2154170073" then
+        return "SJ8T-18812-EC"
+    elseif sPartNumber == "2154170069" then
+        return "SJ8T-18812-RCB"
+    elseif sPartNumber == "2154170068" then
+        return "SJ8T-14F662-SD"
+    elseif sPartNumber == "2154170066" then
+        return "SJ8T-14F662-KD"
+    elseif sPartNumber == "2154170070" then
+        return "SJ8T-18812-REC"
+    elseif sPartNumber == "2154160038" then
+        return "SJ8T-14F662-JA"
+    elseif sPartNumber == "2154170072" then
+        return "SJ8T-19A397-EC"
+    elseif sPartNumber == "2154170071" then
+        return "SJ8T-19A397-LEB"
+    elseif sPartNumber == "2154170061" then
+        return "SJ8T-19A397-REC"
     else
         return sPartNumber
     end
