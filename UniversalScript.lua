@@ -202,9 +202,27 @@ function DataForPrint()
     if sPartNumber == "2003020591" then
         sRev = "REV A"
         sNp = "NRS-S-DVP2011"
+    elseif sPartNumber == "2003021528" then-------agregado 3 mzo
+        sRev = "NRS-S-DVP3046"
+        sNp = "molex GG"
+    elseif sPartNumber == "2003021529" then
+        sRev = "NRS-S-DVP3047"
+        sNp = "molex leoni"
+    elseif sPartNumber == "2003021156" then
+        sRev = "NRS-S-DVP2662"
+        sNp = "MX condumex J-P"
+    elseif sPartNumber == "2003021157" then
+        sRev = "NRS-S-DVP2663"
+        sNp = "MX condumex J-P"
+    elseif sPartNumber == "2003021158" then
+        sRev = "NRS-S-DVP2664"
+        sNp = "MX condumex J-J"
     elseif sPartNumber == "probando" then
         sRev = "REV A"
         sNp = "74751006"
+    elseif sPartNumber == "2003021181" then
+        sRev = "NRS-S-DVP2706"
+        sNp = "MX condumex jack-jack"
         --IncrementCycleCounter(baseCounterPath .. "59Z120-C00-C.txt")
         --IncrementCycleCounter(baseCounterPath .. "59Z120-C00-C2.txt")
     elseif sPartNumber == "2003021248" then
@@ -264,9 +282,7 @@ function DataForPrint()
         IncrementCycleCounter(baseCounterPath .. "AMZ025-000-D.txt")
         IncrementCycleCounter(baseCounterPath .. "59Z118-C00-A.txt")
         IncrementCycleCounter(baseCounterPath .. "59Z113-000-N.txt")
-    elseif sPartNumber == "2088702221" then
-        sRev = "REV A1"
-        sNp = "284R4 7SB0C"      
+     
     elseif sPartNumber == "2088702318" then
         sRev = "REV A"
         sNp = "284R2 7SA1D"
@@ -299,6 +315,11 @@ function DataForPrint()
         sNp = "73754255"
         IncrementCycleCounter(baseCounterPath .. "59Z115-000-A.txt")
         IncrementCycleCounter(baseCounterPath .. "59Z120-C00-C2.txt")
+    elseif sPartNumber == "2098700177" then
+        sRev = "REV A1"
+        sNp = "09923673"
+        IncrementCycleCounter(baseCounterPath .. "59Z118-C00-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-E.txt")
     elseif sPartNumber == "2098700189" then
         sRev = "REV A1"
         sNp = "73755126"
@@ -505,8 +526,8 @@ function DataForPrint()
         IncrementCycleCounter(baseCounterPath .. "59Z113-000-C.txt")
         IncrementCycleCounter(baseCounterPath .. "59Z113-000-F.txt")
     elseif sPartNumber == "2098706031" then
-        sRev = "74751272"
-        sNp = "REV A"
+        sRev = "REV A"
+        sNp = "74751272"
         IncrementCycleCounter(baseCounterPath .. "59Z113-000-L.txt")
         IncrementCycleCounter(baseCounterPath .. "59Z113-000-D.txt")
     elseif sPartNumber == "2098706040" then
@@ -718,16 +739,7 @@ function DataForPrint()
         sNp = "74756301"
         IncrementCycleCounter(baseCounterPath .. "AMZW17-000-B.txt")
         IncrementCycleCounter(baseCounterPath .. "AMZW25-000-B.txt")
-    elseif sPartNumber == "2098700058" then
-        sRev = "REV A3"
-        sNp = "99754308"
-        IncrementCycleCounter(baseCounterPath .. "59Z163-003-A.txt")
-        IncrementCycleCounter(baseCounterPath .. "59Z118-C00-L.txt")
-    elseif sPartNumber == "2098706023" then
-        sRev = "REV A"
-        sNp = "73755926"
-        IncrementCycleCounter(baseCounterPath .. "59Z113-000-D.txt")
-        IncrementCycleCounter(baseCounterPath .. "59Z113-000-L.txt")
+
     -------------------------------------------------------------------------------------------------------------
     -------------------------------------------------------- Inicia bloque FORD
     -------------------------------------------------------------------------------------------------------------
@@ -750,7 +762,7 @@ function DataForPrint()
     elseif sPartNumber == "2154160034" then
         sPartNumber = "SJ8T-14F662-JA"
         IncrementCycleCounter(baseCounterPath .. "59Z163-003-F.txt")
-        IncrementCycleCounter(baseCounterPath .. "59z178-000.txt")
+        IncrementCycleCounter(baseCounterPath .. "59K24K-1M4A4-F.txt")
 
     elseif sPartNumber == "2154160035" then
         sPartNumber = "SJ8T-18812-RCA"
@@ -780,15 +792,64 @@ function DataForPrint()
     elseif sPartNumber == "2154170052" then
         sPartNumber = "SJ8T-19A397-LEA"
 
-    elseif sPartNumber == "2154170059" then
-        sPartNumber = "SJ8T-19A397-EB"
+-------------------------------------------------------------------------------------------NEW ONES
+    elseif sPartNumber == "2154170067" then
+        sPartNumber = "SJ8T-18812-CC"
+        IncrementCycleCounter(baseCounterPath .. "59Z153-C00-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z153-000-B.txt")
+
+    elseif sPartNumber == "2154170073" then
+        sPartNumber = "SJ8T-18812-EC"
+        IncrementCycleCounter(baseCounterPath .. "59Z153-C00-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z153-000-A.txt")
+
+    elseif sPartNumber == "2154170069" then
+        sPartNumber = "SJ8T-18812-RCB"
+        IncrementCycleCounter(baseCounterPath .. "59Z153-000-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z153-000-B.txt")
+
+    elseif sPartNumber == "2154170068" then
+        sPartNumber = "SJ8T-14F662-SD"
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-F.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z114-000-A.txt")
+
+    elseif sPartNumber == "2154170066" then
+        sPartNumber = "SJ8T-14F662-KD"
+        IncrementCycleCounter(baseCounterPath .. "59Z176-C01-F.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z114-000-A.txt")
+
+    elseif sPartNumber == "2154170070" then
+        sPartNumber = "SJ8T-18812-REC"
+        IncrementCycleCounter(baseCounterPath .. "59Z153-C00-B.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z153-000-A.txt")
+
+    elseif sPartNumber == "2154160038" then
+        sPartNumber = "SJ8T-14F662-JA"
+
+    elseif sPartNumber == "2154170072" then
+        sPartNumber = "SJ8T-19A397-EC"
         IncrementCycleCounter(baseCounterPath .. "AMZ040-C00-D.txt")
         IncrementCycleCounter(baseCounterPath .. "59Z153-000-K.txt")
         IncrementCycleCounter(baseCounterPath .. "AMZW25-000-A.txt")
         IncrementCycleCounter(baseCounterPath .. "AMZW25-000-B.txt")
+
+    elseif sPartNumber == "2154170071" then
+        sPartNumber = "SJ8T-19A397-LEB"
+        IncrementCycleCounter(baseCounterPath .. "AMZ040-C00-D.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z153-000-K.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-B.txt")
+
+    elseif sPartNumber == "2154170061" then
+        sPartNumber = "SJ8T-19A397-REC"
+        IncrementCycleCounter(baseCounterPath .. "AMZ040-C00-D.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z153-000-K.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-B.txt")
+--------------------------------------------------------------------------------------------ends new ones
   
     else
-        error("Numero de parte no dado de alta: " .. sPartNumber", favor de contactar a Ing. de Pruebas") 
+        error("Numero de parte no dado de alta: " .. sPartNumber .. ", favor de contactar a Ing. de Pruebas") 
     end
     
     if sRev == sRevF then
@@ -838,6 +899,28 @@ function ConvertPartNumber(sPartNumber)
         return "SJ8T-14F662-SC"
     elseif sPartNumber == "2154160037" then
         return "SJ8T-14F662-KC"
+
+----------------------------------------------------Actualizacion ford new PNs
+    elseif sPartNumber == "2154170067" then
+        return "SJ8T-18812-CC"
+    elseif sPartNumber == "2154170073" then
+        return "SJ8T-18812-EC"
+    elseif sPartNumber == "2154170069" then
+        return "SJ8T-18812-RCB"
+    elseif sPartNumber == "2154170068" then
+        return "SJ8T-14F662-SD"
+    elseif sPartNumber == "2154170066" then
+        return "SJ8T-14F662-KD"
+    elseif sPartNumber == "2154170070" then
+        return "SJ8T-18812-REC"
+    elseif sPartNumber == "2154160038" then
+        return "SJ8T-14F662-JA"
+    elseif sPartNumber == "2154170072" then
+        return "SJ8T-19A397-EC"
+    elseif sPartNumber == "2154170071" then
+        return "SJ8T-19A397-LEB"
+    elseif sPartNumber == "2154170061" then
+        return "SJ8T-19A397-REC"
     else
         return sPartNumber
     end
@@ -932,10 +1015,10 @@ function DoOnTestEvent(iEventType)
 
             if iCountForClean >= 600 then
                 local startTime = os.time()
-                local mess = DialogOpen("~Limpieza de impresora~".."\n\nFavor de hacer limpieza de impresora.\n\n\n\nEsperando 2 minutos antes de continuar...")
+                local mess = DialogOpen("~Sopleteo~".."\n\nFavor de hacer limpieza de modulos con aire comprimido.\n\n\n\nEsperando 30 seg antes de continuar...")
                 
-                -- Esperar 2 minutos (120 segundos)
-                local waitTime = 120
+                -- Esperar 30 segundos (30 segundos)
+                local waitTime = 30
                 while os.difftime(os.time(), startTime) < waitTime do
                     Delay(5) -- esperar 5 segundo para no saturar el CPU
                 end
