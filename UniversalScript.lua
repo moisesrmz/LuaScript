@@ -222,7 +222,7 @@ function DataForPrint()
         sNp = "74751006"
     elseif sPartNumber == "2003021181" then
         sRev = "NRS-S-DVP2706"
-        sNp = "MX condumex jack-jack"
+        sNp = "MX condumex J-J"
         --IncrementCycleCounter(baseCounterPath .. "59Z120-C00-C.txt")
         --IncrementCycleCounter(baseCounterPath .. "59Z120-C00-C2.txt")
     elseif sPartNumber == "2003021248" then
