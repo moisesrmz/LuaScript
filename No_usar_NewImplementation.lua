@@ -1,4 +1,4 @@
-﻿-- UniversalScript created by moises.ramirez1@molex.com
+-- UniversalScript created by moises.ramirez1@molex.com
 
 local printerConfigFile = "C:\\Users\\Public\\Documents\\Cirris\\config.txt"
 local sThePrinterLocation, sThePrinterLocationCT4, sTester, sLine = "", "", "", ""
@@ -155,33 +155,66 @@ function PrintErrorOnCT4(errorText, np)
 end
 
 function IncrementCycleCounter(filePath)
+
+    local N1, M1, M2 = 0,0,0
     local file = io.open(filePath, "r")
-    local count = 0
+
     if file then
         local contents = file:read("*a")
         file:close()
-        count = tonumber(contents) or 0
+
+        -- Detectar si es formato nuevo
+        local n1 = contents:match("N1%s*=%s*(%d+)")
+        local m1 = contents:match("M1%s*=%s*(%d+)")
+        local m2 = contents:match("M2%s*=%s*(%d+)")
+
+        if n1 and m1 and m2 then
+            -- Formato nuevo
+            N1 = tonumber(n1) or 0
+            M1 = tonumber(m1) or 0
+            M2 = tonumber(m2) or 0
+        else
+            -- Formato viejo (un solo numero)
+            local single = tonumber(contents) or 0
+            N1 = single
+            M1 = single
+            M2 = single
+        end
     end
-    count = count + 1
-    if count >= 30000 then
+
+    -- Incrementar contadores
+    N1 = N1 + 1
+    M1 = M1 + 1
+    M2 = M2 + 1
+
+    -- Revisar limite
+    if (N1 >= 30000) or (M1 >= 30000) or (M2 >= 30000) then
+
         local fileName = filePath:match("([^\\]+)$") or filePath
 
-        local mess = DialogOpen("Se han rebasado las 30,000 activaciones para:\n"..fileName.."\n\nFavor de contactar a Ingeniería de Pruebas.")
+        local mess = DialogOpen(
+            "Se han rebasado las 30,000 activaciones para:\n"..fileName..
+            "\n\nN1="..N1.."  M1="..M1.."  M2="..M2..
+            "\n\nFavor de contactar a Ingeniería de Pruebas."
+        )
+
         Delay(5)
         DialogClose(mess)
 
         os.execute('taskkill /f /im easywire.exe')
     end
 
-
-    -- 4. Escribir el nuevo valor al archivo
+    -- Guardar siempre en formato nuevo
     local fileWrite = io.open(filePath, "w")
     if fileWrite then
-        fileWrite:write(tostring(count))
+        fileWrite:write("N1="..N1.."\n")
+        fileWrite:write("M1="..M1.."\n")
+        fileWrite:write("M2="..M2.."\n")
         fileWrite:close()
     else
         error("No se pudo escribir en el archivo: " .. filePath)
     end
+
 end
 
 local baseCounterPath = "\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\CyclesCounter\\" .. sTester .. "\\"
@@ -217,6 +250,8 @@ function DataForPrint()
     elseif sPartNumber == "probando" then
         sRev = "REV A"
         sNp = "74751006"
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-F.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-L.txt")
     elseif sPartNumber == "2003021181" then
         sRev = "NRS-S-DVP2706"
         sNp = "MX condumex J-J"
@@ -226,20 +261,7 @@ function DataForPrint()
         sRev = "NRS-S-DVP2730"
         sNp = "RSB CONDUMEX"
         --IncrementCycleCounter(baseCounterPath .. "59Z120-C00-C.txt")
-        --IncrementCycleCounter(baseCounterPath .. "59Z120-C00-C2.txt")-----------termina 3-mzo-26
-    elseif sPartNumber == "2003021274" then---------------------------------------inicia 11-mzo-26
-        sRev = "NRS-S-DVP2824"
-        sNp = "MX Plug-Jack 2m"
-    elseif sPartNumber == "2003021272" then
-        sRev = "NRS-S-DVP2822"
-        sNp = "MX Plug-Jack 1m"
-    elseif sPartNumber == "2003021328" then
-        sRev = "NRS-S-DVP2859"
-        sNp = "MX Plug-Jack 5m"
-    elseif sPartNumber == "2003021270" then
-        sRev = "NRS-S-DVP2820"
-        sNp = "MX Plug-Jack 1.5m"           ---------------------------------------termina 11-mzo-26
-        
+        --IncrementCycleCounter(baseCounterPath .. "59Z120-C00-C2.txt")
     elseif sPartNumber == "testing" then
         sRev = "REV A"
         sNp = "74751006"
