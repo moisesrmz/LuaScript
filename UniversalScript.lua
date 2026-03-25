@@ -239,7 +239,30 @@ function DataForPrint()
     elseif sPartNumber == "2003021270" then
         sRev = "NRS-S-DVP2820"
         sNp = "MX Plug-Jack 1.5m"           ---------------------------------------termina 11-mzo-26
+
+
+
+    elseif sPartNumber == "2003021253" then---------------------------------------inicia 25-mzo-26
+        sRev = "NRS-S-DVP2735"
+        sNp = "RSB Condumex P-J"
+    elseif sPartNumber == "2003021530" then
+        sRev = "NRS-S-DVP3052"
+        sNp = "MX GG Plug-Jack"
+    elseif sPartNumber == "2003021531" then
+        sRev = "NRS-S-DVP3048"
+        sNp = "RSB Condumex P-J"
+    elseif sPartNumber == "2003021532" then
+        sRev = "NRS-S-DVP3049"
+        sNp = "MX Condumex P-J"
+    elseif sPartNumber == "2003021533" then
+        sRev = "NRS-S-DVP3050"
+        sNp = "MX Condumex J-J"
+    elseif sPartNumber == "2003021534" then
+        sRev = "NRS-S-DVP3051"
+        sNp = "MX Condumex J-J"      ---------------------------------------termina 25-mzo-26
         
+
+
     elseif sPartNumber == "testing" then
         sRev = "REV A"
         sNp = "74751006"
