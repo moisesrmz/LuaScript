@@ -260,9 +260,23 @@ function DataForPrint()
     elseif sPartNumber == "2003021534" then
         sRev = "NRS-S-DVP3051"
         sNp = "MX Condumex J-J"      ---------------------------------------termina 25-mzo-26
-        
+ 
 
-
+    elseif sPartNumber == "2003021252" then
+        sRev = "NRS-S-DVP2734"
+        sNp = "RSB G&G P-J"        
+    elseif sPartNumber == "2003021658" then
+        sRev = "NRS-S-DVP3164"
+        sNp = "TL0 RTK044" 
+    elseif sPartNumber == "2003021659" then
+        sRev = "NRS-S-DVP3165"
+        sNp = "TL1 RTK044"      ---------------------------------------termina 01-Apr-26 
+    elseif sPartNumber == "2003021660" then
+        sRev = "NRS-S-DVP3166"
+        sNp = "TL1 RTK031"----------------------------------------------09 abr-25
+    elseif sPartNumber == "2267110028" then
+        sRev = "REV A"
+        sNp = "284R4 7SB1B"
     elseif sPartNumber == "testing" then
         sRev = "REV A"
         sNp = "74751006"
@@ -298,7 +312,7 @@ function DataForPrint()
         IncrementCycleCounter(baseCounterPath .. "59Z176-C01-A.txt")
     ---------------------------------------------------------Nissan--------------------------------------------------
     elseif sPartNumber == "2088702198" then
-        sRev = "REV B1"
+        sRev = "REV C NON-PPAP"---anterior B1
         sNp = "284T6 7SA0C" 
         IncrementCycleCounter(baseCounterPath .. "AMZ010-C00-F.txt")
         IncrementCycleCounter(baseCounterPath .. "59Z113-000-F.txt")
