@@ -312,7 +312,7 @@ function DataForPrint()
         IncrementCycleCounter(baseCounterPath .. "59Z176-C01-A.txt")
     ---------------------------------------------------------Nissan--------------------------------------------------
     elseif sPartNumber == "2088702198" then
-        sRev = "REV B1"---anterior B1
+        sRev = "REV B1"---anterior C para non-ppap
         sNp = "284T6 7SA0C" 
         IncrementCycleCounter(baseCounterPath .. "AMZ010-C00-F.txt")
         IncrementCycleCounter(baseCounterPath .. "59Z113-000-F.txt")
