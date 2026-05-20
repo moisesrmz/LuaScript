@@ -3,6 +3,8 @@
 local printerConfigFile = "C:\\Users\\Public\\Documents\\Cirris\\config.txt"
 local sThePrinterLocation, sThePrinterLocationCT4, sTester, sLine = "", "", "", ""
 local printerConfig = {}
+-- Variable global (arriba del script)
+lastCleanTime = os.time()
 
 function LoadPrinterConfigurations(filePath)
     local configFile = io.open(filePath, "r")
@@ -312,7 +314,7 @@ function DataForPrint()
         IncrementCycleCounter(baseCounterPath .. "59Z176-C01-A.txt")
     ---------------------------------------------------------Nissan--------------------------------------------------
     elseif sPartNumber == "2088702198" then
-        sRev = "REV B1"---anterior C para non-ppap
+        sRev = "REV B1"---anterior C
         sNp = "284T6 7SA0C" 
         IncrementCycleCounter(baseCounterPath .. "AMZ010-C00-F.txt")
         IncrementCycleCounter(baseCounterPath .. "59Z113-000-F.txt")
@@ -325,7 +327,7 @@ function DataForPrint()
         sRev = "REV C"
         sNp = "284R5 7SB0B"
     elseif sPartNumber == "2088702207" then
-        sRev = "REV C"
+        sRev = "REV C"---Orig REV C
         sNp = "284R4 7SA0B"
         IncrementCycleCounter(baseCounterPath .. "AMZW31-000-B.txt")
         IncrementCycleCounter(baseCounterPath .. "AMZ010-C00-A.txt")
@@ -1062,31 +1064,49 @@ function DoOnTestEvent(iEventType)
     if iEventType == 3 then
         if (bAutoGood == 1) and (GetCableStatus() == 0) then
             DoCustomReport()
-            iCountForClean = iCountForClean + 1
+                        -- Revisar si ya pasó 1 hora desde la última limpieza
+            if os.difftime(os.time(), lastCleanTime) >= 3600 then
 
-            if iCountForClean >= 600 then
                 local startTime = os.time()
-                local mess = DialogOpen("~Sopleteo~".."\n\nFavor de hacer limpieza de modulos con aire comprimido.\n\n\n\nEsperando 30 seg antes de continuar...")
-                
-                -- Esperar 30 segundos (30 segundos)
+
+                local mess = DialogOpen(
+                    "~Sopleteo~"..
+                    "\n\nFavor de hacer limpieza de modulos con aire comprimido."..
+                    "\n\n\n\nEsperando 30 seg antes de continuar..."
+                )
+
+                -- Esperar 30 segundos
                 local waitTime = 30
+
                 while os.difftime(os.time(), startTime) < waitTime do
-                    Delay(5) -- esperar 5 segundo para no saturar el CPU
+                    Delay(5)
                 end
-                
+
                 local endTime = os.time()
                 local elapsedTime = os.difftime(endTime, startTime)
+
                 local minutes = math.floor(elapsedTime / 60)
                 local seconds = elapsedTime % 60
-                local elapsedMessage = "Tiempo cumplido: " .. minutes .. " minutos y " .. seconds .. " segundos."
-                local done = DialogOpen("Gracias. Limpieza completada.\n\n" .. elapsedMessage)
+
+                local elapsedMessage =
+                    "Tiempo cumplido: " ..
+                    minutes .. " minutos y " ..
+                    seconds .. " segundos."
+
+                local done = DialogOpen(
+                    "Gracias. Limpieza completada.\n\n" ..
+                    elapsedMessage
+                )
+
                 Delay(5)
                 DialogClose(done)
 
                 if mess then
                     DialogClose(mess)
                 end
-                iCountForClean = 0
+
+                -- Reiniciar contador de tiempo
+                lastCleanTime = os.time()
             end
 
         elseif (bAutoBad == 0) and (GetCableStatus() ~= 0) then
