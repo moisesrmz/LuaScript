@@ -1076,7 +1076,7 @@ function DoOnTestEvent(iEventType)
                 )
 
                 -- Esperar 30 segundos
-                local waitTime = 30
+                local waitTime = 25
 
                 while os.difftime(os.time(), startTime) < waitTime do
                     Delay(5)
