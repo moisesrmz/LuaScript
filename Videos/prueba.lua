@@ -33,6 +33,8 @@ local sLine = printerConfig["sLine"]
 bAutoGood = 1
 bAutoBad = 0
 iCountForClean = 0 
+-------
+bDebugMode = false
 
 function DetermineShift(currentTime)
     local hour, minute = currentTime:match("^(%d%d):(%d%d)")
@@ -132,7 +134,10 @@ end
 
 
 function PrintErrorOnCT4(errorText, np)
-    -- Recortar texto innecesario si comienza con "LUA"
+
+    if bDebugMode then
+        return
+    end
     if errorText:sub(1, 3) == "LUA" then
         local pointStart = errorText:find("Point")
         if pointStart then
@@ -201,7 +206,7 @@ function DataForPrint()
     if sPartNumber == "2003020591" then
         sRev = "REV A"
         sNp = "NRS-S-DVP2011"
-    elseif sPartNumber == "2003021528" then-------agregado 3 mzo
+    elseif sPartNumber == "PruebaBloqueo15Fail" then-------agregado 3 mzo
         sRev = "NRS-S-DVP3046"
         sNp = "molex GG"
     elseif sPartNumber == "2003021529" then
@@ -314,7 +319,7 @@ function DataForPrint()
         IncrementCycleCounter(baseCounterPath .. "59Z176-C01-A.txt")
     ---------------------------------------------------------Nissan--------------------------------------------------
     elseif sPartNumber == "2088702198" then
-        sRev = "REV B1"---anterior C
+        sRev = "REV C"---anterior B1, pero se cambio a C por solicitud de Nissan, revisar correo de Isa Dominguez al respecto
         sNp = "284T6 7SA0C" 
         IncrementCycleCounter(baseCounterPath .. "AMZ010-C00-F.txt")
         IncrementCycleCounter(baseCounterPath .. "59Z113-000-F.txt")
@@ -1030,6 +1035,10 @@ function FindAndReplaceInsideString(sFindAndReplaceInput, tFindAndReplaceWith, s
 end
 
 function DoCustomReport()
+
+    if bDebugMode then
+        return
+    end
     local numero = GetWirelistInfoAsText(1)
     local numeroEquivalente = ConvertPartNumber(numero)
     local sPrintThis
@@ -1049,17 +1058,30 @@ end
 
 function DoOnTestEvent(iEventType)
 
-    --if iEventType == 2 then
-    --   local inputDetected = ReadUserInputStates(3)
-    --    while inputDetected == 0 do
-    --        local mess = DialogOpen("Advertencia:\n\n\nPresion de aire fuera del rango permitido: <40psi y >90psi.\n\n\nNo puedes continuar probando, favor de llamar a Ingenieria de Pruebas.")
-    --        Delay(1)
-    --        DialogClose(mess)
-    --        inputDetected = ReadUserInputStates(3)
-    --    end
+    if iEventType == 2 then
 
-    --    Delay(0)
-    --end
+        local sUser = string.upper(GetSystemInfoAsText(2))
+
+        bDebugMode = (sUser == "DEBUG")
+
+        if bDebugMode then
+
+            local msg = DialogOpen(
+                "\n\n      *** MODO DEBUG ACTIVO ***" ..
+                "\n\n      *** MODO DEBUG ACTIVO ***"..
+                "\n\n      *** MODO DEBUG ACTIVO ***"..
+                "\n\n      *** MODO DEBUG ACTIVO ***"..
+                "\n\n      *** MODO DEBUG ACTIVO ***"..
+                "\n\n      *** MODO DEBUG ACTIVO ***"..
+                "\n\n      *** MODO DEBUG ACTIVO ***"
+            )
+
+            Delay(1)
+            DialogClose(msg)
+
+        end
+
+    end
     -------------------------------------------------------------------
     if iEventType == 3 then
         if (bAutoGood == 1) and (GetCableStatus() == 0) then
@@ -1104,8 +1126,7 @@ function DoOnTestEvent(iEventType)
                 if mess then
                     DialogClose(mess)
                 end
-
-                -- Reiniciar contador de tiempo
+                -- Reiniciar contador de tiempo 
                 lastCleanTime = os.time()
             end
 

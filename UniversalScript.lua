@@ -33,7 +33,7 @@ local sLine = printerConfig["sLine"]
 bAutoGood = 1
 bAutoBad = 0
 iCountForClean = 0 
-
+bDebugMode = false
 function DetermineShift(currentTime)
     local hour, minute = currentTime:match("^(%d%d):(%d%d)")
     hour = tonumber(hour)
@@ -132,6 +132,10 @@ end
 
 
 function PrintErrorOnCT4(errorText, np)
+
+    if bDebugMode then
+        return
+    end
     -- Recortar texto innecesario si comienza con "LUA"
     if errorText:sub(1, 3) == "LUA" then
         local pointStart = errorText:find("Point")
@@ -1030,6 +1034,10 @@ function FindAndReplaceInsideString(sFindAndReplaceInput, tFindAndReplaceWith, s
 end
 
 function DoCustomReport()
+
+    if bDebugMode then
+        return
+    end
     local numero = GetWirelistInfoAsText(1)
     local numeroEquivalente = ConvertPartNumber(numero)
     local sPrintThis
@@ -1049,18 +1057,30 @@ end
 
 function DoOnTestEvent(iEventType)
 
-    --if iEventType == 2 then
-    --   local inputDetected = ReadUserInputStates(3)
-    --    while inputDetected == 0 do
-    --        local mess = DialogOpen("Advertencia:\n\n\nPresion de aire fuera del rango permitido: <40psi y >90psi.\n\n\nNo puedes continuar probando, favor de llamar a Ingenieria de Pruebas.")
-    --        Delay(1)
-    --        DialogClose(mess)
-    --        inputDetected = ReadUserInputStates(3)
-    --    end
+    if iEventType == 2 then
 
-    --    Delay(0)
-    --end
-    -------------------------------------------------------------------
+        local sUser = string.upper(GetSystemInfoAsText(2))
+
+        bDebugMode = (sUser == "DEBUG")
+
+        if bDebugMode then
+
+            local msg = DialogOpen(
+                "\n\n      *** MODO DEBUG ACTIVO ***" ..
+                "\n\n      *** MODO DEBUG ACTIVO ***"..
+                "\n\n      *** MODO DEBUG ACTIVO ***"..
+                "\n\n      *** MODO DEBUG ACTIVO ***"..
+                "\n\n      *** MODO DEBUG ACTIVO ***"..
+                "\n\n      *** MODO DEBUG ACTIVO ***"..
+                "\n\n      *** MODO DEBUG ACTIVO ***"
+            )
+
+            Delay(1)
+            DialogClose(msg)
+
+        end
+
+    end-----------------------------------------------------
     if iEventType == 3 then
         if (bAutoGood == 1) and (GetCableStatus() == 0) then
             DoCustomReport()
