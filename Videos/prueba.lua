@@ -1,4 +1,4 @@
-﻿ -- UniversalScript created by moises.ramirez1@molex.com
+ -- UniversalScript created by moises.ramirez1@molex.com
 
 local printerConfigFile = "C:\\Users\\Public\\Documents\\Cirris\\config.txt"
 local sThePrinterLocation, sThePrinterLocationCT4, sTester, sLine = "", "", "", ""
@@ -314,7 +314,7 @@ function DataForPrint()
         IncrementCycleCounter(baseCounterPath .. "59Z176-C01-A.txt")
     ---------------------------------------------------------Nissan--------------------------------------------------
     elseif sPartNumber == "2088702198" then
-        sRev = "REV C"---anterior B1, "C" 18-jun-26 Correo Isa Dominguez
+        sRev = "REV B1"---anterior C
         sNp = "284T6 7SA0C" 
         IncrementCycleCounter(baseCounterPath .. "AMZ010-C00-F.txt")
         IncrementCycleCounter(baseCounterPath .. "59Z113-000-F.txt")
