@@ -1,0 +1,2 @@
+2026-06-18 17:01:38 | Tester=Percha2 | Line=F3 | PN=PruebaBloqueo15Fail | Fails=15 | UnlockedBy=Moises Ramirez | Comment=fueron pruebas negativas
+2026-06-18 17:03:23 | Tester=Percha2 | Line=F3 | PN=PruebaBloqueo15Fail | Fails=15 | UnlockedBy=Maria Lopez | Comment=fallas a granel

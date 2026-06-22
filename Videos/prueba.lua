@@ -34,7 +34,41 @@ bAutoGood = 1
 bAutoBad = 0
 iCountForClean = 0 
 -------
+lastShiftResetMinute = ""
 bDebugMode = false
+failWindow = {}
+lastFailPartNumber = ""
+FAIL_LIMIT = 15
+FAIL_WINDOW_SEC = 3600
+
+PASSWORD_FILE = "\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\luaScripts\\passwords.txt"
+UNLOCK_LOG_FILE = "\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\luaScripts\\unlock_log.txt"
+function CheckShiftReset()
+
+    local currentMinute = os.date("%H:%M")
+
+    if currentMinute ~= lastShiftResetMinute then
+
+        if currentMinute == "06:25"
+        or currentMinute == "14:25"
+        or currentMinute == "21:55" then
+
+            failWindow = {}
+
+            local msg = DialogOpen(
+                "Cambio de turno detectado.\n\n" ..
+                "Ventana de fallas reiniciada."
+            )
+
+            Delay(2)
+            DialogClose(msg)
+
+        end
+
+        lastShiftResetMinute = currentMinute
+
+    end
+end
 
 function DetermineShift(currentTime)
     local hour, minute = currentTime:match("^(%d%d):(%d%d)")
@@ -1036,9 +1070,6 @@ end
 
 function DoCustomReport()
 
-    if bDebugMode then
-        return
-    end
     local numero = GetWirelistInfoAsText(1)
     local numeroEquivalente = ConvertPartNumber(numero)
     local sPrintThis
@@ -1052,10 +1083,161 @@ function DoCustomReport()
         sPrintThis = PrintStringRAW()
     end
     local tPrintData = DataForPrint()
+    if bDebugMode then
+        return
+    end
     sPrintThis = FindAndReplaceInsideString(sPrintThis, tPrintData)
     PrintRAWOnEZW(sPrintThis, sThePrinterLocation)
 end
+-----------------------------------------------new functions for password unlock after fails
+function IsValidPassword(inputPassword)
 
+    local f = io.open(PASSWORD_FILE, "r")
+
+    if not f then
+        MessageBox(
+            "No se pudo abrir:\n" ..
+            PASSWORD_FILE
+        )
+        return false, ""
+    end
+
+    for line in f:lines() do
+
+        line = line:gsub("^%s+", "")
+        line = line:gsub("%s+$", "")
+
+        local filePassword, userName =
+            line:match("^([^,]+),(.+)$")
+
+        if filePassword and userName then
+
+            filePassword = filePassword:gsub("^%s+", "")
+            filePassword = filePassword:gsub("%s+$", "")
+
+            userName = userName:gsub("^%s+", "")
+            userName = userName:gsub("%s+$", "")
+
+            if inputPassword == filePassword then
+
+                f:close()
+
+                return true, userName
+
+            end
+        end
+    end
+
+    f:close()
+
+    return false, ""
+
+end
+
+function LogUnlock(userLine, comment, failCount, partNumber)
+    local f = io.open(UNLOCK_LOG_FILE, "a")
+    if f then
+        f:write(
+            os.date("%Y-%m-%d %H:%M:%S") ..
+            " | Tester=" .. tostring(sTester) ..
+            " | Line=" .. tostring(sLine) ..
+            " | PN=" .. tostring(partNumber) ..
+            " | Fails=" .. tostring(failCount) ..
+            " | UnlockedBy=" .. tostring(userLine) ..
+            " | Comment=" .. tostring(comment) ..
+            "\n"
+        )
+        f:close()
+    end
+end
+
+function WaitForPasswordUnlock(failCount, partNumber)
+
+    while true do
+
+        local password = PromptForUserInformation(
+            5,
+            "BLOQUEO POR FALLAS",
+            "Se detectaron "..failCount..
+            " fallas dentro de una ventana movil de 1 hora.\n\n"..
+            "Ingrese password para desbloquear.",
+            20,
+            ""
+        )
+
+        if password == nil then
+            password = ""
+        end
+
+        local isValid, userName = IsValidPassword(password)
+
+        if isValid then
+
+            local comment = PromptForUserInformation(
+                1,
+                "Comentario requerido",
+                "Ingrese motivo del desbloqueo:",
+                120,
+                ""
+            )
+
+            if comment == nil then
+                comment = ""
+            end
+
+            LogUnlock(
+                userName,
+                comment,
+                failCount,
+                partNumber
+            )
+
+            failWindow = {}
+
+            MessageBox(
+                "Desbloqueo autorizado.\n\n" ..
+                "Usuario: "..userName
+            )
+
+            break
+
+        else
+
+            MessageBox(
+                "Password incorrecto.\n\n" ..
+                "Favor de intentar nuevamente."
+            )
+
+        end
+
+    end
+
+end
+
+function RegisterFailAndCheckBlock(partNumber)
+    local now = os.time()
+
+    if partNumber ~= lastFailPartNumber then
+        failWindow = {}
+        lastFailPartNumber = partNumber
+    end
+
+    table.insert(failWindow, now)
+
+    local freshFails = {}
+    for i = 1, #failWindow do
+        if os.difftime(now, failWindow[i]) <= FAIL_WINDOW_SEC then
+            table.insert(freshFails, failWindow[i])
+        end
+    end
+
+    failWindow = freshFails
+
+    if #failWindow >= FAIL_LIMIT then
+        WaitForPasswordUnlock(#failWindow, partNumber)
+    end
+end
+------------------------------------------------------------ends new functions for password unlock after fails
 function DoOnTestEvent(iEventType)
 
     if iEventType == 2 then
@@ -1084,6 +1266,7 @@ function DoOnTestEvent(iEventType)
     end
     -------------------------------------------------------------------
     if iEventType == 3 then
+        CheckShiftReset()
         if (bAutoGood == 1) and (GetCableStatus() == 0) then
             DoCustomReport()
                         -- Revisar si ya pasó 1 hora desde la última limpieza
@@ -1133,13 +1316,15 @@ function DoOnTestEvent(iEventType)
         elseif (bAutoBad == 0) and (GetCableStatus() ~= 0) then
             local errorText = GetErrorText()
             local np = GetWirelistInfoAsText(1)
+            if not bDebugMode then
+                RegisterFailAndCheckBlock(np)
+            end
             PrintErrorOnCT4(errorText, np)
             local mess = DialogOpen("~Falla~".."Ensamble con falla, favor de llamar al depto. de calidad para que disponga material no conforme.\n\n\n\n" .. GetErrorText())
             Delay(3)
             DialogClose(mess)
         end
     end
-
 end
 
 
