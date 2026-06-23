@@ -363,8 +363,10 @@ function DataForPrint()
         IncrementCycleCounter(baseCounterPath .. "AMZW01-000-F.txt")
         IncrementCycleCounter(baseCounterPath .. "59Z113-000-F.txt")
     elseif sPartNumber == "2088702200" then
-        sRev = "REV C"
+        sRev = "REV D"-----Antes C, 23jun, wsp Heri.
         sNp = "284R5 7SB0B"
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-N.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZ032-C00-B.txt")
     elseif sPartNumber == "2088702207" then
         sRev = "REV C"---Orig REV C
         sNp = "284R4 7SA0B"
@@ -1159,7 +1161,7 @@ function WaitForPasswordUnlock(failCount, partNumber)
             5,
             "BLOQUEO POR FALLAS",
             "Se detectaron "..failCount..
-            " fallas dentro de una ventana movil de 1 hora.\n\n"..
+            " fallas dentro en el rango de 1 hora.\n\n"..
             "Ingrese password para desbloquear.",
             20,
             ""
@@ -1194,26 +1196,29 @@ function WaitForPasswordUnlock(failCount, partNumber)
 
             failWindow = {}
 
-            MessageBox(
+            local msg = DialogOpen(
                 "Desbloqueo autorizado.\n\n" ..
-                "Usuario: "..userName
+                "Usuario: " .. userName
             )
+            Delay(1)
+            DialogClose(msg)
 
             break
 
         else
 
-            MessageBox(
+            local msg = DialogOpen(
                 "Password incorrecto.\n\n" ..
                 "Favor de intentar nuevamente."
             )
+            Delay(1)
+            DialogClose(msg)
 
         end
 
     end
 
 end
-
 function RegisterFailAndCheckBlock(partNumber)
     local now = os.time()
 

@@ -1,2 +1,5 @@
 2026-06-18 17:01:38 | Tester=Percha2 | Line=F3 | PN=PruebaBloqueo15Fail | Fails=15 | UnlockedBy=Moises Ramirez | Comment=fueron pruebas negativas
 2026-06-18 17:03:23 | Tester=Percha2 | Line=F3 | PN=PruebaBloqueo15Fail | Fails=15 | UnlockedBy=Maria Lopez | Comment=fallas a granel
+2026-06-22 10:17:52 | Tester=Percha2 | Line=F3 | PN=PruebaBloqueo15Fail | Fails=15 | UnlockedBy=Maria Lopez | Comment=motivo por el cual
+2026-06-22 10:37:18 | Tester=Percha2 | Line=F3 | PN=PruebaBloqueo15Fail | Fails=15 | UnlockedBy=Moises Ramirez | Comment=motivos varios
+2026-06-22 14:32:48 | Tester=Percha2 | Line=F3 | PN=PruebaBloqueo15Fail | Fails=15 | UnlockedBy=Maria Lopez | Comment=todo bien
