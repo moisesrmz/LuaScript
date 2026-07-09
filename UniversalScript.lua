@@ -33,7 +33,43 @@ local sLine = printerConfig["sLine"]
 bAutoGood = 1
 bAutoBad = 0
 iCountForClean = 0 
+-------
+lastShiftResetMinute = ""
 bDebugMode = false
+failWindow = {}
+lastFailPartNumber = ""
+FAIL_LIMIT = 15-----------ajustar la cantidad necesaria
+FAIL_WINDOW_SEC = 3600
+
+PASSWORD_FILE = "\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\luaScripts\\passwords.txt"
+UNLOCK_LOG_FILE = "\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\luaScripts\\unlock_log.txt"
+function CheckShiftReset()
+
+    local currentMinute = os.date("%H:%M")
+
+    if currentMinute ~= lastShiftResetMinute then
+
+        if currentMinute == "06:25"
+        or currentMinute == "14:25"
+        or currentMinute == "21:55" then
+
+            failWindow = {}
+
+            local msg = DialogOpen(
+                "Cambio de turno detectado.\n\n" ..
+                "Ventana de fallas reiniciada."
+            )
+
+            Delay(2)
+            DialogClose(msg)
+
+        end
+
+        lastShiftResetMinute = currentMinute
+
+    end
+end
+
 function DetermineShift(currentTime)
     local hour, minute = currentTime:match("^(%d%d):(%d%d)")
     hour = tonumber(hour)
@@ -136,7 +172,6 @@ function PrintErrorOnCT4(errorText, np)
     if bDebugMode then
         return
     end
-    -- Recortar texto innecesario si comienza con "LUA"
     if errorText:sub(1, 3) == "LUA" then
         local pointStart = errorText:find("Point")
         if pointStart then
@@ -205,7 +240,7 @@ function DataForPrint()
     if sPartNumber == "2003020591" then
         sRev = "REV A"
         sNp = "NRS-S-DVP2011"
-    elseif sPartNumber == "2003021528" then-------agregado 3 mzo
+    elseif sPartNumber == "PruebaBloqueo15Fail" then-------agregado 3 mzo
         sRev = "NRS-S-DVP3046"
         sNp = "molex GG"
     elseif sPartNumber == "2003021529" then
@@ -273,7 +308,28 @@ function DataForPrint()
         sNp = "RSB G&G P-J"        
     elseif sPartNumber == "2003021658" then
         sRev = "NRS-S-DVP3164"
-        sNp = "TL0 RTK044" 
+        sNp = "TL0 RTK044"
+    elseif sPartNumber == "2003021335" then--------agregado 8jul25
+        sRev = "NRS-S-DVP2869"
+        sNp = "SF P-J Guad AI"
+    elseif sPartNumber == "2003021336" then--------agregado 8jul25
+        sRev = "NRS-S-DVP2870"
+        sNp = "SF P-J Guad AI"
+    elseif sPartNumber == "2003021249" then--------agregado 8jul25
+        sRev = "NRS-S-DVP2731"
+        sNp = "SF P-J RSB AI" 
+    elseif sPartNumber == "2003021250" then--------agregado 8jul25
+        sRev = "NRS-S-DVP2732"
+        sNp = "SF P-J RSB AI" 
+    elseif sPartNumber == "2003021334" then--------agregado 8jul25
+        sRev = "NRS-S-DVP2868"
+        sNp = "SF P-J RSB AI" 
+    elseif sPartNumber == "2003021337" then--------agregado 8jul25
+        sRev = "NRS-S-DVP2871"
+        sNp = "SF P-J Guad AI" 
+    elseif sPartNumber == "2003021251" then--------agregado 8jul25
+        sRev = "NRS-S-DVP2733"
+        sNp = "SF P-J RSB AI" 
     elseif sPartNumber == "2003021659" then
         sRev = "NRS-S-DVP3165"
         sNp = "TL1 RTK044"      ---------------------------------------termina 01-Apr-26 
@@ -318,7 +374,7 @@ function DataForPrint()
         IncrementCycleCounter(baseCounterPath .. "59Z176-C01-A.txt")
     ---------------------------------------------------------Nissan--------------------------------------------------
     elseif sPartNumber == "2088702198" then
-        sRev = "REV C"---anterior B1, "C" 18-jun-26 Correo Isa Dominguez
+        sRev = "REV C"---anterior B1, pero se cambio a C por solicitud de Nissan, revisar correo de Isa Dominguez al respecto
         sNp = "284T6 7SA0C" 
         IncrementCycleCounter(baseCounterPath .. "AMZ010-C00-F.txt")
         IncrementCycleCounter(baseCounterPath .. "59Z113-000-F.txt")
@@ -328,8 +384,10 @@ function DataForPrint()
         IncrementCycleCounter(baseCounterPath .. "AMZW01-000-F.txt")
         IncrementCycleCounter(baseCounterPath .. "59Z113-000-F.txt")
     elseif sPartNumber == "2088702200" then
-        sRev = "REV C"
+        sRev = "REV D"-----Antes C, 23jun, wsp Heri.
         sNp = "284R5 7SB0B"
+        IncrementCycleCounter(baseCounterPath .. "59Z113-000-N.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZ032-C00-B.txt")
     elseif sPartNumber == "2088702207" then
         sRev = "REV C"---Orig REV C
         sNp = "284R4 7SA0B"
@@ -1035,9 +1093,6 @@ end
 
 function DoCustomReport()
 
-    if bDebugMode then
-        return
-    end
     local numero = GetWirelistInfoAsText(1)
     local numeroEquivalente = ConvertPartNumber(numero)
     local sPrintThis
@@ -1051,10 +1106,164 @@ function DoCustomReport()
         sPrintThis = PrintStringRAW()
     end
     local tPrintData = DataForPrint()
+    if bDebugMode then
+        return
+    end
     sPrintThis = FindAndReplaceInsideString(sPrintThis, tPrintData)
     PrintRAWOnEZW(sPrintThis, sThePrinterLocation)
 end
+-----------------------------------------------new functions for password unlock after fails
+function IsValidPassword(inputPassword)
 
+    local f = io.open(PASSWORD_FILE, "r")
+
+    if not f then
+        MessageBox(
+            "No se pudo abrir:\n" ..
+            PASSWORD_FILE
+        )
+        return false, ""
+    end
+
+    for line in f:lines() do
+
+        line = line:gsub("^%s+", "")
+        line = line:gsub("%s+$", "")
+
+        local filePassword, userName =
+            line:match("^([^,]+),(.+)$")
+
+        if filePassword and userName then
+
+            filePassword = filePassword:gsub("^%s+", "")
+            filePassword = filePassword:gsub("%s+$", "")
+
+            userName = userName:gsub("^%s+", "")
+            userName = userName:gsub("%s+$", "")
+
+            if inputPassword == filePassword then
+
+                f:close()
+
+                return true, userName
+
+            end
+        end
+    end
+
+    f:close()
+
+    return false, ""
+
+end
+
+function LogUnlock(userLine, comment, failCount, partNumber)
+    local f = io.open(UNLOCK_LOG_FILE, "a")
+    if f then
+        f:write(
+            os.date("%Y-%m-%d %H:%M:%S") ..
+            " | Tester=" .. tostring(sTester) ..
+            " | Line=" .. tostring(sLine) ..
+            " | PN=" .. tostring(partNumber) ..
+            " | Fails=" .. tostring(failCount) ..
+            " | UnlockedBy=" .. tostring(userLine) ..
+            " | Comment=" .. tostring(comment) ..
+            "\n"
+        )
+        f:close()
+    end
+end
+
+function WaitForPasswordUnlock(failCount, partNumber)
+
+    while true do
+
+        local password = PromptForUserInformation(
+            5,
+            "BLOQUEO POR FALLAS",
+            "Se detectaron "..failCount..
+            " fallas dentro en el rango de 1 hora.\n\n"..
+            "Ingrese password para desbloquear.",
+            20,
+            ""
+        )
+
+        if password == nil then
+            password = ""
+        end
+
+        local isValid, userName = IsValidPassword(password)
+
+        if isValid then
+
+            local comment = PromptForUserInformation(
+                1,
+                "Comentario requerido",
+                "Ingrese motivo del desbloqueo:",
+                120,
+                ""
+            )
+
+            if comment == nil then
+                comment = ""
+            end
+
+            LogUnlock(
+                userName,
+                comment,
+                failCount,
+                partNumber
+            )
+
+            failWindow = {}
+
+            local msg = DialogOpen(
+                "Desbloqueo autorizado.\n\n" ..
+                "Usuario: " .. userName
+            )
+            Delay(1)
+            DialogClose(msg)
+
+            break
+
+        else
+
+            local msg = DialogOpen(
+                "Password incorrecto.\n\n" ..
+                "Favor de intentar nuevamente."
+            )
+            Delay(1)
+            DialogClose(msg)
+
+        end
+
+    end
+
+end
+function RegisterFailAndCheckBlock(partNumber)
+    local now = os.time()
+
+    if partNumber ~= lastFailPartNumber then
+        failWindow = {}
+        lastFailPartNumber = partNumber
+    end
+
+    table.insert(failWindow, now)
+
+    local freshFails = {}
+    for i = 1, #failWindow do
+        if os.difftime(now, failWindow[i]) <= FAIL_WINDOW_SEC then
+            table.insert(freshFails, failWindow[i])
+        end
+    end
+
+    failWindow = freshFails
+
+    if #failWindow >= FAIL_LIMIT then
+        WaitForPasswordUnlock(#failWindow, partNumber)
+    end
+end
+------------------------------------------------------------ends new functions for password unlock after fails
 function DoOnTestEvent(iEventType)
 
     if iEventType == 2 then
@@ -1080,8 +1289,10 @@ function DoOnTestEvent(iEventType)
 
         end
 
-    end-----------------------------------------------------
+    end
+    -------------------------------------------------------------------
     if iEventType == 3 then
+        CheckShiftReset()
         if (bAutoGood == 1) and (GetCableStatus() == 0) then
             DoCustomReport()
                         -- Revisar si ya pasó 1 hora desde la última limpieza
@@ -1124,21 +1335,22 @@ function DoOnTestEvent(iEventType)
                 if mess then
                     DialogClose(mess)
                 end
-
-                -- Reiniciar contador de tiempo
+                -- Reiniciar contador de tiempo 
                 lastCleanTime = os.time()
             end
 
         elseif (bAutoBad == 0) and (GetCableStatus() ~= 0) then
             local errorText = GetErrorText()
             local np = GetWirelistInfoAsText(1)
+            if not bDebugMode then
+                RegisterFailAndCheckBlock(np)
+            end
             PrintErrorOnCT4(errorText, np)
             local mess = DialogOpen("~Falla~".."Ensamble con falla, favor de llamar al depto. de calidad para que disponga material no conforme.\n\n\n\n" .. GetErrorText())
             Delay(3)
             DialogClose(mess)
         end
     end
-
 end
 
 

@@ -38,7 +38,7 @@ lastShiftResetMinute = ""
 bDebugMode = false
 failWindow = {}
 lastFailPartNumber = ""
-FAIL_LIMIT = 15
+FAIL_LIMIT = 15-----------ajustar la cantidad necesaria
 FAIL_WINDOW_SEC = 3600
 
 PASSWORD_FILE = "\\\\mlxgumvwfile01\\Departamentos\\Fakra\\Pruebas\\luaScripts\\passwords.txt"
@@ -358,7 +358,7 @@ function DataForPrint()
         IncrementCycleCounter(baseCounterPath .. "AMZ010-C00-F.txt")
         IncrementCycleCounter(baseCounterPath .. "59Z113-000-F.txt")
     elseif sPartNumber == "2088702199" then
-        sRev = "REV C"
+        sRev = "REV D"
         sNp = "284T6 7SA0D"
         IncrementCycleCounter(baseCounterPath .. "AMZW01-000-F.txt")
         IncrementCycleCounter(baseCounterPath .. "59Z113-000-F.txt")
