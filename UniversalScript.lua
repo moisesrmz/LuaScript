@@ -285,13 +285,13 @@ function DataForPrint()
 
     elseif sPartNumber == "2003021253" then---------------------------------------inicia 25-mzo-26
         sRev = "NRS-S-DVP2735"
-        sNp = "RSB Condumex P-J"
+        sNp = "MX Condumex P-J"
     elseif sPartNumber == "2003021530" then
         sRev = "NRS-S-DVP3052"
         sNp = "MX GG Plug-Jack"
     elseif sPartNumber == "2003021531" then
         sRev = "NRS-S-DVP3048"
-        sNp = "RSB Condumex P-J"
+        sNp = "MX Condumex P-J"
     elseif sPartNumber == "2003021532" then
         sRev = "NRS-S-DVP3049"
         sNp = "MX Condumex P-J"
@@ -337,7 +337,7 @@ function DataForPrint()
         sRev = "NRS-S-DVP3166"
         sNp = "TL1 RTK031"----------------------------------------------09 abr-25
     elseif sPartNumber == "2267110028" then
-        sRev = "REV A"
+        sRev = "REV B"--------cambio de "A" a "B" correo de Isa Dom 10-jul-26
         sNp = "284R4 7SB1B"
     elseif sPartNumber == "testing" then
         sRev = "REV A"
@@ -399,7 +399,7 @@ function DataForPrint()
         IncrementCycleCounter(baseCounterPath .. "59Z113-000-N.txt")
      
     elseif sPartNumber == "2088702318" then
-        sRev = "REV A"
+        sRev = "REV B1"-------------------------de "A"a "B1" por teams de Efrén L
         sNp = "284R2 7SA1D"
     elseif sPartNumber == "2088707042" then
         sRev = "REV B1"

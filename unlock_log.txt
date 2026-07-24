@@ -133,3 +133,220 @@
 2026-07-09 02:48:39 | Tester=EOL2 | Line=F5 | PN=2098700429 | Fails=15 | UnlockedBy=Karen Bautista | Comment=limpieza de modulos y validacion de pines 
 2026-07-09 03:37:13 | Tester=EOL5 | Line=F4 | PN=2098700307 | Fails=15 | UnlockedBy=Karen Bautista | Comment=fallas de nucleo anteriormente se da altura a pines
 2026-07-09 11:16:44 | Tester=EOL3 | Line=F7 | PN=2099700058 | Fails=15 | UnlockedBy=Monica Andrade | Comment=Ajuste de cpa
+2026-07-10 13:55:44 | Tester=Percha2 | Line=F3 | PN=2098706085 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=limpieza
+2026-07-10 15:05:19 | Tester=EOL3 | Line=F7 | PN=2099700058 | Fails=15 | UnlockedBy=Anahi Corona | Comment=error de operacion
+2026-07-10 16:00:53 | Tester=EOL3 | Line=F7 | PN=2099700058 | Fails=15 | UnlockedBy=Anahi Corona | Comment=ajuste de altura de pin nucleo
+2026-07-10 18:29:58 | Tester=Percha3 | Line=F2 | PN=2154140287 | Fails=15 | UnlockedBy=Anahi Corona | Comment=ajuste de altura de pin malla
+2026-07-10 18:47:49 | Tester=EOL4 | Line=F6 | PN=2088702199 | Fails=15 | UnlockedBy=Anahi Corona | Comment=error de operacion
+2026-07-10 19:35:18 | Tester=EOL4 | Line=F6 | PN=2088702199 | Fails=15 | UnlockedBy=Anahi Corona | Comment=cambio de pin malla
+2026-07-10 20:56:36 | Tester=EOL4 | Line=F6 | PN=2088702199 | Fails=15 | UnlockedBy=Karen Bautista | Comment=cambio de pin  en modulo amzw01-000-f por uno delgado y nuevo
+2026-07-11 07:37:15 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Monica Andrade | Comment=Ajuste de pin
+2026-07-11 08:23:10 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Monica Andrade | Comment=limpieza de modulo
+2026-07-11 10:34:36 | Tester=EOL6 | Line=F0 | PN=2098700437 | Fails=15 | UnlockedBy=Monica Andrade | Comment=ndf
+2026-07-11 10:46:22 | Tester=EOL4 | Line=F6 | PN=2088702199 | Fails=15 | UnlockedBy=Monica Andrade | Comment=Se realiza cambio de pin de base da:
+2026-07-11 11:41:32 | Tester=EOL6 | Line=F0 | PN=2098700437 | Fails=15 | UnlockedBy=Monica Andrade | Comment=Cambio de pin de nucleo y ajuste de altura de pin de malla del 59Z153-000-C 
+2026-07-11 11:52:02 | Tester=EOL4 | Line=F6 | PN=2088702199 | Fails=15 | UnlockedBy=Monica Andrade | Comment=aguste de modulo por fallas de tpa
+2026-07-11 12:55:58 | Tester=EOL4 | Line=F6 | PN=2088702199 | Fails=15 | UnlockedBy=Monica Andrade | Comment=Ajuste de altura de pin de malla
+2026-07-11 15:43:00 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=ajuste de altura de pines nucleo
+2026-07-11 16:36:15 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-11 18:20:07 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-11 19:25:36 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-11 19:36:23 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales de dielectrico
+2026-07-13 10:29:44 | Tester=EOL2 | Line=F5 | PN=2098700309 | Fails=15 | UnlockedBy=Monica Andrade | Comment=Ajuate dealtura de pin
+2026-07-13 11:27:07 | Tester=EOL3 | Line=F7 | PN=2098700436 | Fails=15 | UnlockedBy=Monica Andrade | Comment=ndf
+2026-07-13 12:45:21 | Tester=EOL3 | Line=F7 | PN=2098700436 | Fails=15 | UnlockedBy=Monica Andrade | Comment=ndf
+2026-07-13 14:08:59 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=atrabe rapido 
+2026-07-13 14:19:48 | Tester=EOL3 | Line=F7 | PN=2098700436 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=pin quebrado
+2026-07-13 15:19:21 | Tester=EOL3 | Line=F7 | PN=2098700436 | Fails=15 | UnlockedBy=Anahi Corona | Comment=ajuste de altura de pines
+2026-07-13 15:47:01 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas de dielectrico en diagnostico
+2026-07-13 16:11:39 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=posible fallas reales se manda a Diag
+2026-07-13 16:21:30 | Tester=EOL5 | Line=F4 | PN=2003021531 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=VALIDACION INGENIERIA
+2026-07-13 16:31:17 | Tester=EOL5 | Line=F4 | PN=2003021531 | Fails=15 | UnlockedBy=Eduardo Zamorano | Comment=vALIDACION DE pv SAMPLES
+2026-07-13 16:47:23 | Tester=EOL5 | Line=F4 | PN=2003021531 | Fails=15 | UnlockedBy=Eduardo Zamorano | Comment=pv samples
+2026-07-13 17:50:59 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-13 18:01:27 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas resles
+2026-07-13 18:13:44 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-13 18:26:32 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-13 18:58:52 | Tester=EOL3 | Line=F7 | PN=2098700436 | Fails=15 | UnlockedBy=Anahi Corona | Comment=ajuste de altura de pin nucleo
+2026-07-13 19:39:31 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=ajuste de altura de pin
+2026-07-13 19:49:52 | Tester=EOL3 | Line=F7 | PN=2098700436 | Fails=15 | UnlockedBy=Anahi Corona | Comment=ajuste de altura de pin
+2026-07-13 20:22:47 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=ajuste de altura pin nucleo
+2026-07-13 21:10:32 | Tester=EOL3 | Line=F7 | PN=2098700436 | Fails=15 | UnlockedBy=Anahi Corona | Comment=ajuste de altura pin nucleo
+2026-07-13 21:21:08 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=ajuste de altura de pin
+2026-07-14 00:35:35 | Tester=EOL5 | Line=F4 | PN=2088702198 | Fails=15 | UnlockedBy=Karen Bautista | Comment=espera de diagnostico por parte de pruebas
+2026-07-14 04:17:44 | Tester=EOL3 | Line=F7 | PN=2098700436 | Fails=15 | UnlockedBy=Karen Bautista | Comment=cambio de  pin malla modulo 59z153-000-f
+2026-07-14 04:35:38 | Tester=EOL3 | Line=F7 | PN=2098700436 | Fails=15 | UnlockedBy=Karen Bautista | Comment=cambio de modulo 59z153-000-f ajuste de altura pin de nucleo
+2026-07-14 06:45:07 | Tester=EOL6 | Line=F0 | PN=2098700437 | Fails=15 | UnlockedBy=Monica Andrade | Comment=No cambian a debug pars hscer red rabitt
+2026-07-14 07:45:43 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Monica Andrade | Comment=Se diagnostican piezas 
+2026-07-14 10:34:53 | Tester=EOL5 | Line=F4 | PN=2003021532 | Fails=15 | UnlockedBy=Eduardo Zamorano | Comment=validaciones PV samples
+2026-07-14 10:44:35 | Tester=EOL5 | Line=F4 | PN=2003021532 | Fails=15 | UnlockedBy=Eduardo Zamorano | Comment=Validacion PV samples
+2026-07-14 13:24:31 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Heriberto Aviles | Comment=ACOMODO DE PIEZAS
+2026-07-14 13:29:29 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Monica Andrade | Comment=ndf
+2026-07-14 13:39:39 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Heriberto Aviles | Comment=ajuste de base
+2026-07-14 14:03:01 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Heriberto Aviles | Comment=fallas de ndielectrico retest
+2026-07-14 14:06:58 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=validacion de pz
+2026-07-14 14:13:03 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=validaciones
+2026-07-14 14:24:54 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Heriberto Aviles | Comment=desalineado
+2026-07-14 14:48:14 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Heriberto Aviles | Comment=pin desviado
+2026-07-14 14:56:52 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Moises Ramirez | Comment=validaciones
+2026-07-14 14:57:16 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Evelyn Glez | Comment=limpieza en modulos t2
+2026-07-14 15:11:56 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Evelyn Glez | Comment=limpieza en modulo 
+2026-07-14 15:17:12 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Moises Ramirez | Comment=validacionesl
+2026-07-14 15:35:27 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Moises Ramirez | Comment=321321
+2026-07-14 15:44:43 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Evelyn Glez | Comment=fallas de dielectrico t2
+2026-07-14 16:01:27 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Heriberto Aviles | Comment=reales
+2026-07-14 16:13:07 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Moises Ramirez | Comment=validaciones
+2026-07-14 16:14:27 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas eales de dielectrico
+2026-07-14 16:24:23 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales de dielectrico
+2026-07-14 16:36:54 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales de dielecttrico
+2026-07-14 16:37:27 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Monica Andrade | Comment=dielectrico
+2026-07-14 16:49:01 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Moises Ramirez | Comment=fallas reales de corto
+2026-07-14 16:54:30 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Monica Andrade | Comment=ajuste de malla
+2026-07-14 17:00:12 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Evelyn Glez | Comment=reales
+2026-07-14 17:50:09 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-14 17:57:40 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Monica Andrade | Comment=fallas de dielectrico
+2026-07-14 18:01:27 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-14 18:08:37 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-14 18:12:28 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Anahi Corona | Comment=limpieza de modulos
+2026-07-14 18:20:08 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-14 18:29:39 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-14 18:46:22 | Tester=EOL2 | Line=F5 | PN=2098700307 | Fails=15 | UnlockedBy=Anahi Corona | Comment=ajuste de altura pin nucle
+2026-07-14 18:49:23 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-14 19:00:21 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-14 19:13:19 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Anahi Corona | Comment=se soldan cables mal soldados de pin de atrape
+2026-07-14 19:13:59 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-14 19:22:09 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-14 19:36:19 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-14 19:48:38 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Anahi Corona | Comment=limpieza de modulos
+2026-07-14 19:52:48 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-14 20:10:37 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-14 20:11:08 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Anahi Corona | Comment=limpieza de modulos
+2026-07-14 20:21:03 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-14 20:30:26 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-14 20:33:36 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Anahi Corona | Comment=limpieza de modulos
+2026-07-14 20:41:45 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-14 20:43:04 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Anahi Corona | Comment=limpieza de modulos
+2026-07-14 20:53:08 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-14 21:05:09 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-14 21:05:28 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Anahi Corona | Comment=limpieza de modulos
+2026-07-14 21:13:38 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-14 21:17:25 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Anahi Corona | Comment=limpieza de modulos
+2026-07-14 21:25:31 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-14 21:33:30 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-15 07:35:01 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Monica Andrade | Comment=limpieza
+2026-07-15 08:01:35 | Tester=EOL5 | Line=F4 | PN=2088702198 | Fails=15 | UnlockedBy=Monica Andrade | Comment=Ajuste de pin de  TPA
+2026-07-15 08:06:58 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Evelyn Glez | Comment=reales
+2026-07-15 09:42:58 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Moises Ramirez | Comment=dielectrico reales
+2026-07-15 10:32:26 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Monica Andrade | Comment=LIMPIEZA
+2026-07-15 10:36:45 | Tester=EOL5 | Line=F4 | PN=2088702198 | Fails=15 | UnlockedBy=Monica Andrade | Comment=validacion de piezas
+2026-07-15 10:59:07 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Moises Ramirez | Comment=REALES DE DIELECTRICO
+2026-07-15 11:46:29 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=VALIDACION DE PZ
+2026-07-15 12:25:32 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Monica Andrade | Comment=Diagnostico
+2026-07-15 12:48:19 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Monica Andrade | Comment=valiadaciomm
+2026-07-15 13:10:48 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Monica Andrade | Comment=material en diagnostico
+2026-07-15 13:24:17 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Monica Andrade | Comment=DIAGNOSTICO
+2026-07-15 13:31:28 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Monica Andrade | Comment=NDF
+2026-07-15 13:36:02 | Tester=EOL5 | Line=F4 | PN=2088702198 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=dielectric poin failed 
+2026-07-15 13:46:03 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=FALLAS REALES FOIL EN DILECTRICO
+2026-07-15 13:56:22 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=FAILEDPOINT TEST
+2026-07-15 14:05:12 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=REALES 
+2026-07-15 14:16:33 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Monica Andrade | Comment=NDF
+2026-07-15 16:02:09 | Tester=Percha3 | Line=F2 | PN=2154140243 | Fails=15 | UnlockedBy=Anahi Corona | Comment=error de operacion
+2026-07-15 17:01:20 | Tester=Percha3 | Line=F2 | PN=2154140243 | Fails=15 | UnlockedBy=Anahi Corona | Comment=error de operacion
+2026-07-15 20:45:11 | Tester=EOL5 | Line=F4 | PN=2088702198 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas en revicion
+2026-07-15 21:13:29 | Tester=EOL4 | Line=F6 | PN=2267110028 | Fails=15 | UnlockedBy=Anahi Corona | Comment=ERROR DE OPERACION
+2026-07-15 21:30:26 | Tester=Percha3 | Line=F2 | PN=2154140243 | Fails=15 | UnlockedBy=Anahi Corona | Comment=error de operacion
+2026-07-15 21:46:48 | Tester=EOL4 | Line=F6 | PN=2267110028 | Fails=15 | UnlockedBy=Anahi Corona | Comment=AJUSTE DE SENSOR DE TPA
+2026-07-16 00:14:18 | Tester=EOL4 | Line=F6 | PN=2267110028 | Fails=15 | UnlockedBy=Karen Bautista | Comment=MALA INSERCION EN CONECTOR DUAL 
+2026-07-16 00:42:35 | Tester=EOL4 | Line=F6 | PN=2267110028 | Fails=15 | UnlockedBy=Karen Bautista | Comment=SE AJUSTA BALIN DE TPA MODULO AMZW31-000-B
+2026-07-16 02:16:12 | Tester=EOL4 | Line=F6 | PN=2267110028 | Fails=15 | UnlockedBy=Karen Bautista | Comment=FALLAS EN TPA  SE VALIDA MODULO DE NUEVO
+2026-07-16 03:11:45 | Tester=EOL4 | Line=F6 | PN=2267110028 | Fails=15 | UnlockedBy=Karen Bautista | Comment=AJUSTE DE SENSOR BALIN MODULO DUAL
+2026-07-16 03:37:44 | Tester=EOL4 | Line=F6 | PN=2267110028 | Fails=15 | UnlockedBy=Karen Bautista | Comment=21171831
+2026-07-16 05:12:06 | Tester=EOL3 | Line=F7 | PN=2098700436 | Fails=15 | UnlockedBy=Karen Bautista | Comment=46092
+2026-07-16 05:29:08 | Tester=EOL3 | Line=F7 | PN=2098700436 | Fails=15 | UnlockedBy=Karen Bautista | Comment=fallas de cpa, se valida con piezas de linea
+2026-07-16 05:51:49 | Tester=EOL3 | Line=F7 | PN=2098700436 | Fails=15 | UnlockedBy=Karen Bautista | Comment=cambio de pin de nucleo modulo 59z113-000-c
+2026-07-16 09:05:14 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=malla limpieza
+2026-07-16 09:30:15 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Moises Ramirez | Comment=fallas diversas,
+2026-07-16 12:22:10 | Tester=EOL5 | Line=F4 | PN=2088702198 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=fallas reales
+2026-07-17 01:44:57 | Tester=EOL2 | Line=F5 | PN=2098700434 | Fails=15 | UnlockedBy=Moises Ramirez | Comment=socket da;ado
+2026-07-17 09:40:48 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Monica Andrade | Comment=DIAGNOSTICO
+2026-07-17 10:02:26 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Monica Andrade | Comment=VALIDACION
+2026-07-17 10:24:56 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Evelyn Glez | Comment=EN VALIDACION DE PIEZAS 
+2026-07-17 11:22:01 | Tester=EOL7 | Line=F8 | PN=2154170050 | Fails=15 | UnlockedBy=Monica Andrade | Comment=limpieza
+2026-07-17 13:34:21 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Monica Andrade | Comment=DIAGNOSTICO
+2026-07-17 13:59:51 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Monica Andrade | Comment=VALIDACION
+2026-07-17 14:07:00 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Evelyn Glez | Comment=REALES
+2026-07-17 15:06:15 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=fallas reales
+2026-07-17 15:33:21 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-17 15:50:46 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=material se mandara MRB
+2026-07-17 16:13:03 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=dilectricos
+2026-07-17 16:25:41 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-17 16:50:22 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Evelyn Glez | Comment=reales
+2026-07-17 18:03:35 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-17 18:27:35 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-17 18:43:42 | Tester=EOL4 | Line=F6 | PN=2154151075 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-17 21:25:14 | Tester=EOL7 | Line=F8 | PN=2154170050 | Fails=15 | UnlockedBy=Anahi Corona | Comment=ajuste de sensor
+2026-07-18 09:31:43 | Tester=EOL4 | Line=F6 | PN=2088702198 | Fails=15 | UnlockedBy=Monica Andrade | Comment=ndf
+2026-07-18 11:38:56 | Tester=EOL4 | Line=F6 | PN=2088702198 | Fails=15 | UnlockedBy=Monica Andrade | Comment=ndf
+2026-07-18 12:49:43 | Tester=EOL4 | Line=F6 | PN=2088702198 | Fails=15 | UnlockedBy=Monica Andrade | Comment=ndf
+2026-07-18 19:57:46 | Tester=EOL3 | Line=F7 | PN=2098700436 | Fails=15 | UnlockedBy=Karen Bautista | Comment=fallas de malla validacion de modulos
+2026-07-18 21:06:13 | Tester=EOL4 | Line=F6 | PN=2088702198 | Fails=15 | UnlockedBy=Karen Bautista | Comment=validacion de modulos y diagnostico de piezas 
+2026-07-20 08:17:32 | Tester=Percha3 | Line=F2 | PN=2154140243 | Fails=15 | UnlockedBy=Heriberto Aviles | Comment=pin
+2026-07-20 08:18:18 | Tester=EOL3 | Line=F7 | PN=2098700436 | Fails=15 | UnlockedBy=Monica Andrade | Comment=ndf
+2026-07-20 11:19:33 | Tester=EOL3 | Line=F7 | PN=2098700436 | Fails=15 | UnlockedBy=Monica Andrade | Comment=Cambio de modulo 59Z153-000-f por fallas de nucleo, se retira para revisar base
+2026-07-20 11:55:25 | Tester=Percha3 | Line=F2 | PN=2154140243 | Fails=15 | UnlockedBy=Evelyn Glez | Comment=falla de nucleo, se realiza ajuste de altura en pines
+2026-07-20 15:59:25 | Tester=EOL3 | Line=F7 | PN=2098700436 | Fails=15 | UnlockedBy=Anahi Corona | Comment=AJUSTE DE ALTURA DE PIN
+2026-07-20 16:39:35 | Tester=EOL4 | Line=F6 | PN=2088702198 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas reales
+2026-07-20 21:14:38 | Tester=EOL3 | Line=F7 | PN=2098700436 | Fails=15 | UnlockedBy=Anahi Corona | Comment=ajuste de pin malla
+2026-07-20 23:06:24 | Tester=EOL4 | Line=F6 | PN=2267110028 | Fails=15 | UnlockedBy=Karen Bautista | Comment=validacion de modulos por fallas de clip y tpa
+2026-07-21 07:31:17 | Tester=EOL5 | Line=F4 | PN=2154160029 | Fails=15 | UnlockedBy=Monica Andrade | Comment=Ajuste de altura
+2026-07-21 12:51:59 | Tester=EOL5 | Line=F4 | PN=2098706013 | Fails=15 | UnlockedBy=Monica Andrade | Comment=ndf
+2026-07-21 13:37:06 | Tester=EOL5 | Line=F4 | PN=2098706013 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=precion de aire baja fallas de cover
+2026-07-21 22:57:19 | Tester=Percha2 | Line=F3 | PN=2088702199 | Fails=15 | UnlockedBy=Karen Bautista | Comment=fallas de malla validacion de modulos 
+2026-07-22 00:28:01 | Tester=EOL5 | Line=F4 | PN=2098706013 | Fails=15 | UnlockedBy=Karen Bautista | Comment=VALIDACION DE MODULOS Y PINES
+2026-07-22 01:09:13 | Tester=EOL5 | Line=F4 | PN=2098706013 | Fails=15 | UnlockedBy=Karen Bautista | Comment=VALIDACION DE MODULOS
+2026-07-22 03:49:04 | Tester=EOL5 | Line=F4 | PN=2098706013 | Fails=15 | UnlockedBy=Karen Bautista | Comment=VALIDACION DE MODULOS  POR FALLAS DE CPA 
+2026-07-22 04:32:20 | Tester=EOL5 | Line=F4 | PN=2098706013 | Fails=15 | UnlockedBy=Karen Bautista | Comment=VALIDACION DE MODUO
+2026-07-22 08:30:25 | Tester=EOL2 | Line=F5 | PN=2098700320 | Fails=15 | UnlockedBy=Monica Andrade | Comment=ajuste de altura de pin
+2026-07-22 12:29:11 | Tester=Percha2 | Line=F3 | PN=2088702199 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=malla 
+2026-07-22 14:55:42 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Anahi Corona | Comment=fallas en diagnostico
+2026-07-22 15:27:41 | Tester=EOL6 | Line=F0 | PN=2098700437 | Fails=15 | UnlockedBy=Anahi Corona | Comment=error de operacion
+2026-07-22 15:36:48 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Anahi Corona | Comment=limpieza de modulos
+2026-07-22 15:44:47 | Tester=EOL5 | Line=F4 | PN=2098700432 | Fails=15 | UnlockedBy=Anahi Corona | Comment=ajuste de sensor tpa
+2026-07-22 16:02:39 | Tester=EOL5 | Line=F4 | PN=2098700432 | Fails=15 | UnlockedBy=Anahi Corona | Comment=ajuste de sensor tpa
+2026-07-22 16:26:07 | Tester=EOL5 | Line=F4 | PN=2098700432 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=tpa
+2026-07-22 19:53:06 | Tester=EOL5 | Line=F4 | PN=2098700434 | Fails=15 | UnlockedBy=Anahi Corona | Comment=ajuste de sensor tpa
+2026-07-22 20:18:36 | Tester=EOL5 | Line=F4 | PN=2098700434 | Fails=15 | UnlockedBy=Anahi Corona | Comment=ajuste de sensor tpa
+2026-07-22 21:22:02 | Tester=EOL5 | Line=F4 | PN=2098700434 | Fails=15 | UnlockedBy=Anahi Corona | Comment=ajuste de sensor tpa
+2026-07-23 01:26:38 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Karen Bautista | Comment=validacion de pines en ambos modulos
+2026-07-23 02:30:42 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Karen Bautista | Comment=altura de pines nucleo ambos modulos
+2026-07-23 02:46:08 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Karen Bautista | Comment=ajuste dev altura de pines
+2026-07-23 03:25:09 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Karen Bautista | Comment=ajuste de altura de pines malla
+2026-07-23 09:54:15 | Tester=EOL4 | Line=F6 | PN=2088702200 | Fails=15 | UnlockedBy=Evelyn Glez | Comment=fallas en diagnostico 
+2026-07-23 10:46:46 | Tester=EOL4 | Line=F6 | PN=2088702200 | Fails=15 | UnlockedBy=Moises Ramirez | Comment=fallas reales de dielectrico
+2026-07-23 11:12:55 | Tester=EOL4 | Line=F6 | PN=2088702200 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=fallas reales dilectric
+2026-07-23 11:49:29 | Tester=EOL4 | Line=F6 | PN=2088702200 | Fails=15 | UnlockedBy=Heriberto Aviles | Comment=fallas reales
+2026-07-23 11:56:56 | Tester=EOL7 | Line=F8 | PN=2154170050 | Fails=15 | UnlockedBy=Heriberto Aviles | Comment=balin desgastado
+2026-07-23 12:15:10 | Tester=EOL4 | Line=F6 | PN=2088702200 | Fails=15 | UnlockedBy=Monica Andrade | Comment=.
+2026-07-23 12:44:16 | Tester=EOL4 | Line=F6 | PN=2088702200 | Fails=15 | UnlockedBy=Monica Andrade | Comment=Fallas en diagnostuc
+2026-07-23 13:08:39 | Tester=EOL4 | Line=F6 | PN=2088702200 | Fails=15 | UnlockedBy=Monica Andrade | Comment=DIAGNOSTICO
+2026-07-23 13:23:52 | Tester=EOL4 | Line=F6 | PN=2088702200 | Fails=15 | UnlockedBy=Monica Andrade | Comment=Material MRB
+2026-07-23 14:03:08 | Tester=EOL4 | Line=F6 | PN=2088702200 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=LUA COMPOMNENTE
+2026-07-23 15:27:48 | Tester=EOL4 | Line=F6 | PN=2088702200 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=materia se va a RMB fallas reales 
+2026-07-23 15:59:03 | Tester=EOL4 | Line=F6 | PN=2088702200 | Fails=15 | UnlockedBy=Evelyn Glez | Comment=fallas reales
+2026-07-23 16:39:20 | Tester=EOL4 | Line=F6 | PN=2088702200 | Fails=15 | UnlockedBy=Moises Ramirez | Comment=fallas reales de dielectrico
+2026-07-23 17:45:50 | Tester=EOL4 | Line=F6 | PN=2088702200 | Fails=15 | UnlockedBy=Evelyn Glez | Comment=fallas reales
+2026-07-23 18:21:12 | Tester=EOL4 | Line=F6 | PN=2088702200 | Fails=15 | UnlockedBy=Evelyn Glez | Comment=reales
+2026-07-23 19:22:03 | Tester=EOL4 | Line=F6 | PN=2088702200 | Fails=15 | UnlockedBy=Evelyn Glez | Comment=reales
+2026-07-23 20:05:46 | Tester=EOL4 | Line=F6 | PN=2088702200 | Fails=15 | UnlockedBy=Evelyn Glez | Comment=reales
+2026-07-23 20:12:48 | Tester=Percha2 | Line=F3 | PN=2088702199 | Fails=15 | UnlockedBy=Evelyn Glez | Comment=263199
+2026-07-23 20:40:00 | Tester=EOL4 | Line=F6 | PN=2088702200 | Fails=15 | UnlockedBy=Evelyn Glez | Comment=reales
+2026-07-23 21:11:53 | Tester=EOL4 | Line=F6 | PN=2088702200 | Fails=15 | UnlockedBy=Evelyn Glez | Comment=reales
+2026-07-23 23:17:23 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Monica Andrade | Comment=Altura de pin de malla
+2026-07-24 07:35:29 | Tester=EOL4 | Line=F6 | PN=2088702200 | Fails=15 | UnlockedBy=Monica Andrade | Comment=Fallas reales
+2026-07-24 07:55:10 | Tester=EOL4 | Line=F6 | PN=2088702200 | Fails=15 | UnlockedBy=Monica Andrade | Comment=diagnostico
+2026-07-24 07:56:08 | Tester=EOL7 | Line=F8 | PN=2154170050 | Fails=15 | UnlockedBy=Monica Andrade | Comment=falso contacto
+2026-07-24 08:16:31 | Tester=EOL4 | Line=F6 | PN=2088702200 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=LUA 
+2026-07-24 11:05:17 | Tester=EOL7 | Line=F8 | PN=2154170050 | Fails=15 | UnlockedBy=Monica Andrade | Comment=Ajuste de altura
+2026-07-24 11:50:37 | Tester=EOL7 | Line=F8 | PN=2154170050 | Fails=15 | UnlockedBy=Evelyn Glez | Comment=ajuste en p[ines]
+2026-07-24 14:01:58 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=tpsa
