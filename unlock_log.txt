@@ -350,3 +350,55 @@
 2026-07-24 11:05:17 | Tester=EOL7 | Line=F8 | PN=2154170050 | Fails=15 | UnlockedBy=Monica Andrade | Comment=Ajuste de altura
 2026-07-24 11:50:37 | Tester=EOL7 | Line=F8 | PN=2154170050 | Fails=15 | UnlockedBy=Evelyn Glez | Comment=ajuste en p[ines]
 2026-07-24 14:01:58 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=tpsa
+2026-07-24 18:39:27 | Tester=Percha2 | Line=F3 | PN=2088702199 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=ajuste de altura de pin de atrape
+2026-07-24 19:12:55 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=ajuste de balin
+2026-07-24 19:35:07 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Karen Bautista | Comment=validacion de pines de ambos modulos
+2026-07-24 20:15:05 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=ajuste de altura de pin de nucleo
+2026-07-24 20:49:18 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Karen Bautista | Comment=cambio de pin malla modulo amzw17-000-c y ajuste de altura de pines modulo 59z117-c00-e
+2026-07-24 21:48:02 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=ajuste de balin de tpa
+2026-07-24 23:53:39 | Tester=EOL5 | Line=F4 | PN=2098700307 | Fails=15 | UnlockedBy=Karen Bautista | Comment=validacion de modulos y pines
+2026-07-25 06:06:33 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Karen Bautista | Comment=ndf
+2026-07-25 07:08:26 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Monica Andrade | Comment=ndf
+2026-07-25 07:14:00 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Monica Andrade | Comment=limpieza
+2026-07-25 07:56:14 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Monica Andrade | Comment=altura
+2026-07-25 08:13:36 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Monica Andrade | Comment=Ajuste de balita
+2026-07-25 10:27:23 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Monica Andrade | Comment=ajuste de altura
+2026-07-25 15:19:29 | Tester=EOL4 | Line=F6 | PN=2267110028 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=ajuste de alturs de pin de nucleo
+2026-07-25 16:07:28 | Tester=EOL4 | Line=F6 | PN=2267110028 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=ajuste de altura de pin de nucleo
+2026-07-25 18:25:03 | Tester=Percha3 | Line=F2 | PN=2154140290 | Fails=15 | UnlockedBy=Karen Bautista | Comment=validacion de pines por fallas de nucleo
+2026-07-25 18:48:32 | Tester=Percha3 | Line=F2 | PN=2154140290 | Fails=15 | UnlockedBy=Karen Bautista | Comment=validacion de modulos 
+2026-07-25 18:50:59 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Karen Bautista | Comment=en espera de diagnostico de piezas posibles fallas no reales
+2026-07-25 19:18:20 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Karen Bautista | Comment=validacion de pines por fallas de nucleo
+2026-07-25 19:40:22 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Karen Bautista | Comment=validacion de modulos
+2026-07-25 19:45:40 | Tester=Percha2 | Line=F3 | PN=2088702199 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=ajuste de pin de malla
+2026-07-25 19:49:49 | Tester=Percha3 | Line=F2 | PN=2154140290 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=error de operacion
+2026-07-25 19:54:29 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Karen Bautista | Comment=validacion de modulo quad por silueta de laton
+2026-07-25 20:29:15 | Tester=Percha3 | Line=F2 | PN=2154140290 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=ajuste de altura de pin de nucleo
+2026-07-25 21:06:46 | Tester=Percha3 | Line=F2 | PN=2154140290 | Fails=15 | UnlockedBy=Karen Bautista | Comment=validacion de modulo ajuste de altura de pin
+2026-07-25 21:35:59 | Tester=Percha3 | Line=F2 | PN=2154140290 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=ajuste de altura pin de nucleo
+2026-07-27 07:02:32 | Tester=Percha3 | Line=F2 | PN=2154140290 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=error de operacion
+2026-07-27 07:18:43 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=fallas reales
+2026-07-27 07:33:19 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=fallas reales
+2026-07-27 07:50:30 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=reales
+2026-07-27 08:10:08 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Heriberto Aviles | Comment=falso contacto
+2026-07-27 08:23:25 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=reales
+2026-07-27 10:08:12 | Tester=Percha3 | Line=F2 | PN=2154140290 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=error de produccion
+2026-07-27 12:11:31 | Tester=EOL5 | Line=F4 | PN=2098700434 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=nucleo 
+2026-07-27 12:43:09 | Tester=Percha3 | Line=F2 | PN=2154140290 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=error de operacion
+2026-07-27 13:19:32 | Tester=Percha3 | Line=F2 | PN=2154140290 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=error de produccion
+2026-07-27 13:32:19 | Tester=Percha3 | Line=F2 | PN=2154140290 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=reales
+2026-07-27 14:00:06 | Tester=Percha3 | Line=F2 | PN=2154140290 | Fails=15 | UnlockedBy=Evelyn Glez | Comment=Falla de cpa
+2026-07-27 14:15:29 | Tester=Percha2 | Line=F3 | PN=2088702199 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=ajuste de altura de pin de malla
+2026-07-27 15:16:16 | Tester=Percha3 | Line=F2 | PN=2154140290 | Fails=15 | UnlockedBy=Monica Andrade | Comment=Cambio de modulo por fallas de CPA\
+2026-07-27 16:33:24 | Tester=Percha2 | Line=F3 | PN=2088702199 | Fails=15 | UnlockedBy=Monica Andrade | Comment=Ajuste de altura
+2026-07-27 16:42:07 | Tester=Percha3 | Line=F2 | PN=2154140290 | Fails=15 | UnlockedBy=Monica Andrade | Comment=Ajuste de altura de pin de nucleo
+2026-07-28 19:42:39 | Tester=Percha3 | Line=F2 | PN=2154140243 | Fails=15 | UnlockedBy=Monica Andrade | Comment=ALTURA DE PIN DE CPA\
+2026-07-29 04:00:59 | Tester=EOL2 | Line=F5 | PN=2098700307 | Fails=15 | UnlockedBy=Karen Bautista | Comment=validacion de pines nucleo
+2026-07-29 05:25:02 | Tester=EOL3 | Line=F7 | PN=2099700058 | Fails=15 | UnlockedBy=Karen Bautista | Comment=ajuste de altura de pines
+2026-07-29 15:21:58 | Tester=Percha2 | Line=F3 | PN=2098700366 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=cover y sello 
+2026-07-29 18:26:22 | Tester=EOL2 | Line=F5 | PN=2098700058 | Fails=15 | UnlockedBy=Monica Andrade | Comment=Cambio de pin de malla 59Z163-000-A
+2026-07-30 09:55:04 | Tester=Percha2 | Line=F3 | PN=2098700366 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=sello
+2026-07-30 10:01:24 | Tester=EOL3 | Line=F7 | PN=2099700058 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=nucleo
+2026-07-30 10:45:45 | Tester=EOL3 | Line=F7 | PN=2099700058 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=nucleo
+2026-07-30 11:16:04 | Tester=EOL3 | Line=F7 | PN=2099700058 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=ajuste de altura pin de nucleo0
+2026-07-31 10:48:08 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Karen Bautista | Comment=fallas variadas

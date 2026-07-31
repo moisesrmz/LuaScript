@@ -389,7 +389,7 @@ function DataForPrint()
         IncrementCycleCounter(baseCounterPath .. "59Z113-000-N.txt")
         IncrementCycleCounter(baseCounterPath .. "AMZ032-C00-B.txt")
     elseif sPartNumber == "2088702207" then
-        sRev = "REV C"---Orig REV C
+        sRev = "REV E"---Orig REV C 31-ju-26 indicacion J Cervantes
         sNp = "284R4 7SA0B"
         IncrementCycleCounter(baseCounterPath .. "AMZW31-000-B.txt")
         IncrementCycleCounter(baseCounterPath .. "AMZ010-C00-A.txt")
@@ -906,6 +906,10 @@ function DataForPrint()
 
     elseif sPartNumber == "2154170052" then
         sPartNumber = "SJ8T-19A397-LEA"
+        IncrementCycleCounter(baseCounterPath .. "AMZ040-C00-D.txt")
+        IncrementCycleCounter(baseCounterPath .. "59Z153-000-K.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-A.txt")
+        IncrementCycleCounter(baseCounterPath .. "AMZW25-000-B.txt")
 
 -------------------------------------------------------------------------------------------NEW ONES
     elseif sPartNumber == "2154170067" then
