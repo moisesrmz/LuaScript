@@ -402,3 +402,20 @@
 2026-07-30 10:45:45 | Tester=EOL3 | Line=F7 | PN=2099700058 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=nucleo
 2026-07-30 11:16:04 | Tester=EOL3 | Line=F7 | PN=2099700058 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=ajuste de altura pin de nucleo0
 2026-07-31 10:48:08 | Tester=EOL7 | Line=F8 | PN=2154170052 | Fails=15 | UnlockedBy=Karen Bautista | Comment=fallas variadas
+2026-07-31 23:17:23 | Tester=EOL4 | Line=F6 | PN=2088702207 | Fails=15 | UnlockedBy=Karen Bautista | Comment=cambio de pines de nucloe en modulos quad, single
+2026-08-01 06:02:44 | Tester=EOL4 | Line=F6 | PN=2088702200 | Fails=15 | UnlockedBy=Karen Bautista | Comment=validacion de pines de ambos modulos
+2026-08-01 09:54:19 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=ajuste de altura del pin de malla
+2026-08-01 10:31:37 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=cambio de pin de malla
+2026-08-01 11:41:06 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=limpieza de m,odulo
+2026-08-01 12:09:30 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=reales\
+2026-08-01 12:23:18 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Monica Andrade | Comment=ndf
+2026-08-01 13:45:42 | Tester=EOL5 | Line=F4 | PN=2098700434 | Fails=15 | UnlockedBy=Monica Andrade | Comment=Ajuste de sensor de cpa
+2026-08-01 15:05:32 | Tester=EOL5 | Line=F4 | PN=2098700434 | Fails=15 | UnlockedBy=Monica Andrade | Comment=Ajuste de altura de sensor de CPA
+2026-08-01 18:42:58 | Tester=EOL5 | Line=F4 | PN=2098700434 | Fails=15 | UnlockedBy=Monica Andrade | Comment=NDF
+2026-08-03 22:53:24 | Tester=EOL4 | Line=F6 | PN=2267110028 | Fails=15 | UnlockedBy=Karen Bautista | Comment=fallas de tpa se valida balin
+2026-08-03 23:53:32 | Tester=EOL4 | Line=F6 | PN=2267110028 | Fails=15 | UnlockedBy=Karen Bautista | Comment=fallas de tpa modulo dual se valida balin\
+2026-08-04 11:27:16 | Tester=EOL7 | Line=F8 | PN=2154170050 | Fails=15 | UnlockedBy=Evelyn Glez | Comment=limpieza en modulos
+2026-08-04 13:56:26 | Tester=EOL2 | Line=F5 | PN=2098700304 | Fails=15 | UnlockedBy=Evelyn Glez | Comment=ajuste en pines de nucelo 
+2026-08-04 15:31:42 | Tester=EOL2 | Line=F5 | PN=2098700304 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=nucleo 1a
+2026-08-04 15:38:59 | Tester=EOL7 | Line=F8 | PN=2154151239 | Fails=15 | UnlockedBy=Moises Ramirez | Comment=corrida PV
+2026-08-04 15:48:38 | Tester=EOL2 | Line=F5 | PN=2098700304 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=tpa1

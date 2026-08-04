@@ -327,9 +327,12 @@ function DataForPrint()
     elseif sPartNumber == "2003021337" then--------agregado 8jul25
         sRev = "NRS-S-DVP2871"
         sNp = "SF P-J Guad AI" 
-    elseif sPartNumber == "2003021251" then--------agregado 8jul25
-        sRev = "NRS-S-DVP2733"
-        sNp = "SF P-J RSB AI" 
+    elseif sPartNumber == "2003021254" then--------agregado 31jul25
+        sRev = "NRS-S-DVP2736"
+        sNp = "SF Plug-SF Jack" 
+    elseif sPartNumber == "2003021255" then--------agregado 31jul25
+        sRev = "NRS-S-DVP2737"
+        sNp = "SF Plug-SF Jack" 
     elseif sPartNumber == "2003021659" then
         sRev = "NRS-S-DVP3165"
         sNp = "TL1 RTK044"      ---------------------------------------termina 01-Apr-26 
@@ -342,6 +345,18 @@ function DataForPrint()
     elseif sPartNumber == "testing" then
         sRev = "REV A"
         sNp = "74751006"
+    elseif sPartNumber == "2154151233" then
+        sRev = "REV A  Non-PPAP"
+        sNp = "PE698826"
+    elseif sPartNumber == "2154151238" then
+        sRev = "REV A  Non-PPAP"
+        sNp = "PE700396"
+    elseif sPartNumber == "2154156139" then
+        sRev = "REV A1  Non-PPAP"
+        sNp = "PE682212"
+    elseif sPartNumber == "2154151239" then
+        sRev = "REV A1  Non-PPAP"
+        sNp = "PE682192"
     elseif sPartNumber == "2003020692" then
         sRev = "REV A"
         sNp = "74751006"
