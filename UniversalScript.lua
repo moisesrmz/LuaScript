@@ -354,6 +354,9 @@ function DataForPrint()
     elseif sPartNumber == "2154156139" then
         sRev = "REV A1  Non-PPAP"
         sNp = "PE682212"
+    elseif sPartNumber == "2154151237" then
+        sRev = "REV A1  Non-PPAP"
+        sNp = "PE682358"
     elseif sPartNumber == "2154151239" then
         sRev = "REV A1  Non-PPAP"
         sNp = "PE682192"

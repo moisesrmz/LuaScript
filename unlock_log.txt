@@ -419,3 +419,12 @@
 2026-08-04 15:31:42 | Tester=EOL2 | Line=F5 | PN=2098700304 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=nucleo 1a
 2026-08-04 15:38:59 | Tester=EOL7 | Line=F8 | PN=2154151239 | Fails=15 | UnlockedBy=Moises Ramirez | Comment=corrida PV
 2026-08-04 15:48:38 | Tester=EOL2 | Line=F5 | PN=2098700304 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=tpa1
+2026-08-04 21:06:30 | Tester=EOL7 | Line=F8 | PN=2154170050 | Fails=15 | UnlockedBy=Monica Andrade | Comment=Limpieza de modulo
+2026-08-04 21:24:55 | Tester=EOL7 | Line=F8 | PN=2154170050 | Fails=15 | UnlockedBy=Monica Andrade | Comment=validacion
+2026-08-05 00:48:57 | Tester=Percha3 | Line=F2 | PN=2154140295 | Fails=15 | UnlockedBy=Karen Bautista | Comment=validacion de modulos
+2026-08-05 07:36:42 | Tester=EOL7 | Line=F8 | PN=2154170050 | Fails=15 | UnlockedBy=Moises Ramirez | Comment=dielectric
+2026-08-05 08:22:49 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Oscar Lopez | Comment=malla con falso
+2026-08-05 08:26:15 | Tester=EOL7 | Line=F8 | PN=2154170050 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=cambio de pin coaxial
+2026-08-05 09:19:19 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=ajuste de altura de pin
+2026-08-05 09:46:23 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Manuel Garcia | Comment=ajuste en el modulo
+2026-08-05 12:49:06 | Tester=EOL2 | Line=F5 | PN=2098706087 | Fails=15 | UnlockedBy=Evelyn Glez | Comment=ajuste en pines
